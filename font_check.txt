@@ -1,0 +1,389 @@
+﻿
+Path                                                 LineNumber Line                                                                                                                       
+----                                                 ---------- ----                                                                                                                       
+C:\Bruce\src\main.cpp                                       240     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\main.cpp                                       243     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\main.cpp                                       245     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\core\display.cpp                                70     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\core\display.cpp                                82     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\core\display.cpp                               141     if (text.length() * LW * BRUCE_FONT_M < (tftWidth - 2 * BRUCE_FONT_M * LW)) size = BRUCE_FONT_M;                       
+C:\Bruce\src\core\display.cpp                               142     else size = BRUCE_FONT_P;                                                                                              
+C:\Bruce\src\core\display.cpp                               146     if (size == BRUCE_FONT_M) {                                                                                            
+C:\Bruce\src\core\display.cpp                               147         tft.setTextSize(BRUCE_FONT_M);                                                                                     
+C:\Bruce\src\core\display.cpp                               150         tft.setTextSize(BRUCE_FONT_P);                                                                                     
+C:\Bruce\src\core\display.cpp                               152         if (text_size < (tftWidth - 20) / (LW * BRUCE_FONT_P))                                                             
+C:\Bruce\src\core\display.cpp                               183     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\core\display.cpp                               194         y += BRUCE_FONT_M * 8;                                                                                             
+C:\Bruce\src\core\display.cpp                               400     int _maxCharsInLine = (tftWidth - (padx + 1) * BORDER_PAD_X) / (BRUCE_FONT_P * LW);                                    
+C:\Bruce\src\core\display.cpp                               418     int _maxCharsInLine = (tftWidth - (padx + 1) * BORDER_PAD_X) / (BRUCE_FONT_P * LW);                                    
+C:\Bruce\src\core\display.cpp                               508             tftHeight / 2 - menuSize * (BRUCE_FONT_M * 8 + 4) / 2 - 5,                                                     
+C:\Bruce\src\core\display.cpp                               510             (BRUCE_FONT_M * 8 + 4) * menuSize + 10,                                                                        
+C:\Bruce\src\core\display.cpp                               688     int32_t optionsTopY = tftHeight / 2 - menuSize * (BRUCE_FONT_M * 8 + 4) / 2 - 5;                                       
+C:\Bruce\src\core\display.cpp                               692             tftWidth * 0.10, optionsTopY, tftWidth * 0.8, (BRUCE_FONT_M * 8 + 4) * menuSize + 10, 5, bgcolor               
+C:\Bruce\src\core\display.cpp                               696             tftHeight / 2 - menuSize * (BRUCE_FONT_M * 8 + 4) / 2 - 5,                                                     
+C:\Bruce\src\core\display.cpp                               698             (BRUCE_FONT_M * 8 + 4) * menuSize + 10,                                                                        
+C:\Bruce\src\core\display.cpp                               705     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\core\display.cpp                               706     tft.setCursor(tftWidth * 0.10 + 5, tftHeight / 2 - menuSize * (BRUCE_FONT_M * 8 + 4) / 2);                             
+C:\Bruce\src\core\display.cpp                               722                 coord.x = tftWidth * 0.10 + 5 + BRUCE_FONT_M * LW;                                                         
+C:\Bruce\src\core\display.cpp                               724                 coord.size = (tftWidth * 0.8 - 10) / (LW * BRUCE_FONT_M) - 1;                                              
+C:\Bruce\src\core\display.cpp                               730             tft.println(text.substring(0, (tftWidth * 0.8 - 10) / (LW * BRUCE_FONT_M) - 1));                               
+C:\Bruce\src\core\display.cpp                               751     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\core\display.cpp                               753     tft.fillRect(6, 30, tftWidth - 12, 8 * BRUCE_FONT_P, bruceConfig.bgColor);                                             
+C:\Bruce\src\core\display.cpp                               760     int middle_up = middle - (tftHeight - 42) / 3 - BRUCE_FONT_M * LH / 2 + 4;                                             
+C:\Bruce\src\core\display.cpp                               761     int middle_down = middle + (tftHeight - 42) / 3 - BRUCE_FONT_M * LH / 2;                                               
+C:\Bruce\src\core\display.cpp                               763     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\core\display.cpp                               765     tft.drawCentreString("/\\", tftWidth / 2, middle_up - (BRUCE_FONT_M * LH + 6), 1);                                     
+C:\Bruce\src\core\display.cpp                               771     tft.fillRect(6, middle_up, tftWidth - 12, 8 * BRUCE_FONT_M, bruceConfig.bgColor);                                      
+C:\Bruce\src\core\display.cpp                               775     int selectedTextSize = options[index].label.length() <= tftWidth / (LW * BRUCE_FONT_G) - 1 ? BRUCE_FONT_G : BRUCE_FO...
+C:\Bruce\src\core\display.cpp                               778     tft.fillRect(6, middle - BRUCE_FONT_G * LH / 2 - 1, tftWidth - 12, BRUCE_FONT_G * LH + 5, bruceConfig.bgColor);        
+C:\Bruce\src\core\display.cpp                               789     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\core\display.cpp                               791     tft.fillRect(6, middle_down, tftWidth - 12, 8 * BRUCE_FONT_M, bruceConfig.bgColor);                                    
+C:\Bruce\src\core\display.cpp                               798     tft.drawCentreString("\\/", tftWidth / 2, middle_down + (BRUCE_FONT_M * LH + 6), 1);                                   
+C:\Bruce\src\core\display.cpp                               930     int titleSize = BRUCE_FONT_M;                                                                                          
+C:\Bruce\src\core\display.cpp                               931     while (titleSize > BRUCE_FONT_P && (int)(title.length() * titleSize * LW) > tftWidth - 2 * BORDER_PAD_X) {             
+C:\Bruce\src\core\display.cpp                               939     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\core\display.cpp                               943     int16_t cursorX = (tftWidth - (subtitle.length() * BRUCE_FONT_P * LW)) / 2;                                            
+C:\Bruce\src\core\display.cpp                               945     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\core\display.cpp                               947     tft.setCursor(cursorX, BORDER_PAD_Y + BRUCE_FONT_M * LH);                                                              
+C:\Bruce\src\core\display.cpp                               960     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\core\display.cpp                               961     tft.drawRightString(text, tftWidth - BORDER_PAD_X, tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH, SMOOTH_FONT);         
+C:\Bruce\src\core\display.cpp                               965     tft.fillRect(10, tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH, tftWidth - 20, BRUCE_FONT_P * LH, bruceConfig.bgColor); 
+C:\Bruce\src\core\display.cpp                               966     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\core\display.cpp                               967     tft.drawCentreString(text, tftWidth / 2, tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH, SMOOTH_FONT);                   
+C:\Bruce\src\core\display.cpp                               980     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\core\display.cpp                              1009 #define MAX_ITEMS (int)(tftHeight - 20) / (LH * BRUCE_FONT_M)                                                              
+C:\Bruce\src\core\display.cpp                              1018     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\core\display.cpp                              1038                 coord.x = 10 + BRUCE_FONT_M * LW;                                                                          
+C:\Bruce\src\core\display.h                                 122     int x = 0, int y = 0, uint16_t fc = bruceConfig.priColor, int size = BRUCE_FONT_M,                                     
+C:\Bruce\src\core\mykeyboard.cpp                             18 int max_FM_size = tftWidth / (LW * BRUCE_FONT_M) - 1;                                                                      
+C:\Bruce\src\core\mykeyboard.cpp                            231             tft.drawString(String(key), x + w / 2 - BRUCE_FONT_M * LW / 2, y + h / 2 - BRUCE_FONT_M * LH / 2);             
+C:\Bruce\src\core\mykeyboard.cpp                            355     int fontSize = BRUCE_FONT_M;                                                                                           
+C:\Bruce\src\core\mykeyboard.cpp                            357         tft.setTextSize(BRUCE_FONT_P);                                                                                     
+C:\Bruce\src\core\mykeyboard.cpp                            358         fontSize = BRUCE_FONT_P;                                                                                           
+C:\Bruce\src\core\mykeyboard.cpp                            359     } else tft.setTextSize(BRUCE_FONT_M);                                                                                  
+C:\Bruce\src\core\mykeyboard.cpp                            450     max_FM_size = tftWidth / (LW * BRUCE_FONT_M) - 1;                                                                      
+C:\Bruce\src\core\mykeyboard.cpp                            503     const int KBLH = 6 + LH * BRUCE_FONT_M;                                                                                
+C:\Bruce\src\core\mykeyboard.cpp                            504     const int counter_height = LH * BRUCE_FONT_P;                                                                          
+C:\Bruce\src\core\mykeyboard.cpp                            505     const int top_button_text_y = 2 + (KBLH - LH * BRUCE_FONT_M) / 2;                                                      
+C:\Bruce\src\core\mykeyboard.cpp                            512         {1 * PAD + 0 * LW * BRUCE_FONT_M,  3 * LW * BRUCE_FONT_M, 1 * PAD + 0 * LW * BRUCE_FONT_M + LW * BRUCE_FONT_M / ...
+C:\Bruce\src\core\mykeyboard.cpp                            513         {2 * PAD + 3 * LW * BRUCE_FONT_M,  3 * LW * BRUCE_FONT_M, 2 * PAD + 3 * LW * BRUCE_FONT_M + LW * BRUCE_FONT_M / ...
+C:\Bruce\src\core\mykeyboard.cpp                            514         {3 * PAD + 6 * LW * BRUCE_FONT_M,  3 * LW * BRUCE_FONT_M, 3 * PAD + 6 * LW * BRUCE_FONT_M + LW * BRUCE_FONT_M / ...
+C:\Bruce\src\core\mykeyboard.cpp                            515         {4 * PAD + 9 * LW * BRUCE_FONT_M,  3 * LW * BRUCE_FONT_M, 4 * PAD + 9.5 * LW * BRUCE_FONT_M + LW * BRUCE_FONT_M ...
+C:\Bruce\src\core\mykeyboard.cpp                            516         {5 * PAD + 12 * LW * BRUCE_FONT_M, 3 * LW * BRUCE_FONT_M, 5 * PAD + 12 * LW * BRUCE_FONT_M + LW * BRUCE_FONT_M /...
+C:\Bruce\src\core\mykeyboard.cpp                            518         {6 * PAD + 15 * LW * BRUCE_FONT_M, 4 * LW * BRUCE_FONT_M, 6 * PAD + 15 * LW * BRUCE_FONT_M + LW * BRUCE_FONT_M /...
+C:\Bruce\src\core\mykeyboard.cpp                            524     const int text_offset_x = key_width / 2 - LW * BRUCE_FONT_M / 2;                                                       
+C:\Bruce\src\core\mykeyboard.cpp                            525     const int text_offset_y = key_height / 2 - LH * BRUCE_FONT_M / 2;                                                      
+C:\Bruce\src\core\mykeyboard.cpp                            576             tft.setTextSize(BRUCE_FONT_M);                                                                                 
+C:\Bruce\src\core\mykeyboard.cpp                            680             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\core\mykeyboard.cpp                            684                 tftWidth - ((chars_counter.length() * LW * BRUCE_FONT_P) + 20),                                            
+C:\Bruce\src\core\mykeyboard.cpp                            686                 (chars_counter.length() * LW * BRUCE_FONT_P) + 20,                                                         
+C:\Bruce\src\core\mykeyboard.cpp                            687                 LH * BRUCE_FONT_P,                                                                                         
+C:\Bruce\src\core\mykeyboard.cpp                            690             tft.drawString(chars_counter, tftWidth - ((chars_counter.length() * LW * BRUCE_FONT_P) + 10), counter_y);      
+C:\Bruce\src\core\mykeyboard.cpp                            699             tft.setTextSize(BRUCE_FONT_M);                                                                                 
+C:\Bruce\src\core\mykeyboard.cpp                            709                 tft.setTextSize(BRUCE_FONT_P);                                                                             
+C:\Bruce\src\core\mykeyboard.cpp                            723                         textbox_text_y + LH * BRUCE_FONT_P                                                                 
+C:\Bruce\src\core\mykeyboard.cpp                            742             tft.setTextSize(BRUCE_FONT_M);                                                                                 
+C:\Bruce\src\core\mykeyboard.cpp                            779             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\core\mykeyboard.cpp                            781                 cursor_y = textbox_text_y + LH * BRUCE_FONT_P;                                                             
+C:\Bruce\src\core\mykeyboard.cpp                            782                 cursor_x = 5 + (current_text.length() - max_FP_size) * LW * BRUCE_FONT_P;                                  
+C:\Bruce\src\core\mykeyboard.cpp                            785                 cursor_x = 5 + current_text.length() * LW * BRUCE_FONT_P;                                                  
+C:\Bruce\src\core\mykeyboard.cpp                            789             cursor_x = 5 + current_text.length() * LW * BRUCE_FONT_M;                                                      
+C:\Bruce\src\core\mykeyboard.cpp                           1164                     int fontSize = BRUCE_FONT_M;                                                                           
+C:\Bruce\src\core\mykeyboard.cpp                           1166                         tft.setTextSize(BRUCE_FONT_P);                                                                     
+C:\Bruce\src\core\mykeyboard.cpp                           1167                         fontSize = BRUCE_FONT_P;                                                                           
+C:\Bruce\src\core\mykeyboard.cpp                           1168                     } else tft.setTextSize(BRUCE_FONT_M);                                                                  
+C:\Bruce\src\core\scrollableTextArea.cpp                      4     : firstVisibleLine{0}, _redraw{true}, _title(title), _fontSize(BRUCE_FONT_P), _startX(BORDER_PAD_X),                   
+C:\Bruce\src\core\scrollableTextArea.cpp                    165     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\core\sd_functions.cpp                          579     const short PAGE_JUMP_SIZE = (tftHeight - 20) / (LH * BRUCE_FONT_M);                                                   
+C:\Bruce\src\core\theme.cpp                                  49         {"BRUCE_FM",          &theme.BRUCE_FM,          theme.paths.BRUCE_FM         },                                    
+C:\Bruce\src\core\theme.h                                    15     String BRUCE_FM = "";                                                                                                  
+C:\Bruce\src\core\theme.h                                    41     bool BRUCE_FM = false;                                                                                                 
+C:\Bruce\src\core\menu_items\FMMenu.cpp                       4 #include "modules/BRUCE_FONT_M/BRUCE_FM.h"                                                                                 
+C:\Bruce\src\core\menu_items\FMMenu.cpp                      13         {"BRUCE_FM Spectrum", fm_spectrum},                                                                                
+C:\Bruce\src\core\menu_items\FMMenu.cpp                      19     loopOptions(options, MENU_TYPE_SUBMENU, "BRUCE_FM");                                                                   
+C:\Bruce\src\core\menu_items\FMMenu.h                         8     FMMenu() : MenuItemInterface("BRUCE_FM") {}                                                                            
+C:\Bruce\src\core\menu_items\FMMenu.h                        12     bool hasTheme() { return bruceConfig.theme.BRUCE_FM; }                                                                 
+C:\Bruce\src\core\menu_items\FMMenu.h                        13     String themePath() { return bruceConfig.theme.paths.BRUCE_FM; }                                                        
+C:\Bruce\src\core\tftLogger\tftLogger.cpp                   421 void tft_logger::drawWideLine(float ax, float ay, float bx, float by, float wd, int32_t BRUCE_FG, int32_t bg) {            
+C:\Bruce\src\core\tftLogger\tftLogger.cpp                   424             DRAWWIDELINE, (uint16_t)ax, (uint16_t)ay, (uint16_t)bx, (uint16_t)by, (uint16_t)wd, BRUCE_FG, bg               
+C:\Bruce\src\core\tftLogger\tftLogger.cpp                   427     BRUCE_TFT_DRIVER::drawWideLine(ax, ay, bx, by, wd, BRUCE_FG, bg);                                                      
+C:\Bruce\src\core\tftLogger\tftLogger.cpp                   431 void tft_logger::drawFastVLine(int32_t x, int32_t y, int32_t h, int32_t BRUCE_FG) {                                        
+C:\Bruce\src\core\tftLogger\tftLogger.cpp                   432     if (logging) checkAndLog(DRAWFASTVLINE, x, y, h, BRUCE_FG);                                                            
+C:\Bruce\src\core\tftLogger\tftLogger.cpp                   434     BRUCE_TFT_DRIVER::drawFastVLine(x, y, h, BRUCE_FG);                                                                    
+C:\Bruce\src\core\tftLogger\tftLogger.cpp                   438 void tft_logger::drawFastHLine(int32_t x, int32_t y, int32_t w, int32_t BRUCE_FG) {                                        
+C:\Bruce\src\core\tftLogger\tftLogger.cpp                   439     if (logging) checkAndLog(DRAWFASTHLINE, x, y, w, BRUCE_FG);                                                            
+C:\Bruce\src\core\tftLogger\tftLogger.cpp                   441     BRUCE_TFT_DRIVER::drawFastHLine(x, y, w, BRUCE_FG);                                                                    
+C:\Bruce\src\core\wifi\webInterface.cpp                     285     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\core\wifi\webInterface.cpp                     290         currentY += LH * BRUCE_FONT_P + 6;                                                                                 
+C:\Bruce\src\core\wifi\webInterface.cpp                     295     currentY += LH * BRUCE_FONT_P + 6;                                                                                     
+C:\Bruce\src\core\wifi\webInterface.cpp                     299     currentY += LH * BRUCE_FONT_P + 6;                                                                                     
+C:\Bruce\src\core\wifi\webInterface.cpp                     303     currentY += LH * BRUCE_FONT_P + 6;                                                                                     
+C:\Bruce\src\core\wifi\webInterface.cpp                     309     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\core\wifi\webInterface.cpp                     310     tft.drawCentreString("press Esc to stop", tftWidth / 2, tftHeight - 2 * LH * BRUCE_FONT_P - 5, 1);                     
+C:\Bruce\src\core\wifi\wg.cpp                               120     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\core\wifi\wg.cpp                               131     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp             574     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp             576     tft.setCursor(BORDER_OFFSET_FROM_SCREEN_EDGE * 2, BRUCE_FONT_P * 8 * 3 + 2 + STATUS_BAR_HEIGHT);                       
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp             583         tftHeight / 2 - BRUCE_FONT_P * 4 - 2,                                                                              
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp             585         tftHeight / 2 - BRUCE_FONT_P * 4 - 2,                                                                              
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp             589         tft.setTextSize(BRUCE_FONT_P);                                                                                     
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp             745     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp             789     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp             794     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp             800     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1057     uint16_t x = BRUCE_FONT_P * 6 * xOffset + 2 + BORDER_OFFSET_FROM_SCREEN_EDGE;                                          
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1058     uint16_t y = BRUCE_FONT_P * 8 * yOffset + 2 + STATUS_BAR_HEIGHT;                                                       
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1060     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1063     tft.fillRect(x, y, tftWidth - x - BORDER_OFFSET_FROM_SCREEN_EDGE * 2, BRUCE_FONT_P * 8, bruceConfig.bgColor);          
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1076     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1078     tft.drawCentreString("BadUSB/BLE", tftWidth / 2, BRUCE_FONT_P + STATUS_BAR_HEIGHT);                                    
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1080     tft.setCursor(BORDER_OFFSET_FROM_SCREEN_EDGE * 2, BRUCE_FONT_P * 8 * 1 + 2 + STATUS_BAR_HEIGHT);                       
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1085     tft.setCursor(BORDER_OFFSET_FROM_SCREEN_EDGE * 2, BRUCE_FONT_P * 8 * 2 + 2 + STATUS_BAR_HEIGHT);                       
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1119     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1122     int charWidth = 6 * BRUCE_FONT_P;                                                                                      
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1200         tft.setTextSize(BRUCE_FONT_M);                                                                                     
+C:\Bruce\src\modules\badusb_ble\ducky_typer.cpp            1208         tft.setTextSize(BRUCE_FONT_M);                                                                                     
+C:\Bruce\src\modules\bjs_interpreter\dialog_js.cpp          199         tft.setCursor((tftWidth - (strlen(title) * BRUCE_FONT_M * LW)) / 2, padY);                                         
+C:\Bruce\src\modules\bjs_interpreter\dialog_js.cpp          201         tft.setTextSize(BRUCE_FONT_M);                                                                                     
+C:\Bruce\src\modules\bjs_interpreter\dialog_js.cpp          204         tft.setTextSize(BRUCE_FONT_P);                                                                                     
+C:\Bruce\src\modules\bjs_interpreter\display_js.cpp         531     int x = 0, y = 0, BRUCE_FG = 0, bg = -1;                                                                               
+C:\Bruce\src\modules\bjs_interpreter\display_js.cpp         534     if (argc > 5 && JS_IsNumber(ctx, argv[5])) JS_ToInt32(ctx, &BRUCE_FG, argv[5]);                                        
+C:\Bruce\src\modules\bjs_interpreter\display_js.cpp         541             target.sprite->drawXBitmap(x, y, (uint8_t *)data, bitmapWidth, bitmapHeight, BRUCE_FG, bg);                    
+C:\Bruce\src\modules\bjs_interpreter\display_js.cpp         543             target.sprite->drawXBitmap(x, y, (uint8_t *)data, bitmapWidth, bitmapHeight, BRUCE_FG);                        
+C:\Bruce\src\modules\bjs_interpreter\display_js.cpp         547             target.display->drawXBitmap(x, y, (uint8_t *)data, bitmapWidth, bitmapHeight, BRUCE_FG, bg);                   
+C:\Bruce\src\modules\bjs_interpreter\display_js.cpp         549             target.display->drawXBitmap(x, y, (uint8_t *)data, bitmapWidth, bitmapHeight, BRUCE_FG);                       
+C:\Bruce\src\modules\bjs_interpreter\display_js.cpp         554         get_display(ctx, this_val)->drawXBitmap(x, y, (uint8_t *)data, bitmapWidth, bitmapHeight, BRUCE_FG, bg);           
+C:\Bruce\src\modules\bjs_interpreter\display_js.cpp         556         get_display(ctx, this_val)->drawXBitmap(x, y, (uint8_t *)data, bitmapWidth, bitmapHeight, BRUCE_FG);               
+C:\Bruce\src\modules\bjs_interpreter\helpers_js.cpp          11     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\bjs_interpreter\helpers_js.cpp          15     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\bjs_interpreter\helpers_js.cpp          35     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\bjs_interpreter\helpers_js.cpp          39     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\bjs_interpreter\interpreter.cpp         27     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\ble\ble_common.cpp                     254                 tft.setTextSize(BRUCE_FONT_M);                                                                             
+C:\Bruce\src\modules\ble\ble_common.cpp                     258                 tft.setTextSize(BRUCE_FONT_M);                                                                             
+C:\Bruce\src\modules\ble\ble_common.cpp                     284                 tft.setTextSize(BRUCE_FONT_M);                                                                             
+C:\Bruce\src\modules\ble\BLE_Suite.cpp                     3818                 if (fastPair) displayText += " [BRUCE_FP]";                                                                
+C:\Bruce\src\modules\ble\ble_tracker.cpp                    112         tft.setTextSize(BRUCE_FONT_P);                                                                                     
+C:\Bruce\src\modules\ble\ble_tracker.cpp                    120     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\ethernet\ARPSpoofer.cpp                 76         tft.setTextSize(BRUCE_FONT_P);                                                                                     
+C:\Bruce\src\modules\ethernet\HostInfo.cpp                   99     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\fm\fm.cpp                                2 #include "BRUCE_FM.h"                                                                                                      
+C:\Bruce\src\modules\fm\fm.cpp                              147     // Test if BRUCE_FM is attached, if not, close menu                                                                    
+C:\Bruce\src\modules\fm\fm.cpp                              179     // Test if BRUCE_FM is attached, if not, close menu                                                                    
+C:\Bruce\src\modules\ir\ir_jammer.cpp                       223     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\ir\ir_jammer.cpp                       415         tft.setTextSize(BRUCE_FONT_M);                                                                                     
+C:\Bruce\src\modules\ir\ir_jammer.cpp                       434     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\ir\ir_jammer.cpp                       464     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\ir\ir_read.cpp                         201     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\ir\ir_read.cpp                         204     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\ir\ir_read.cpp                         287     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\ir\ir_replay.cpp                        25     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\ir\ir_replay.cpp                        28     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                          
+C:\Bruce\src\modules\ir\ir_replay.cpp                        88     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                          
+C:\Bruce\src\modules\ir\ir_replay.cpp                        92     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\NRF24\nrf_common.cpp                    27     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\NRF24\nrf_common.cpp                    31     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\NRF24\nrf_esb_sniffer.cpp               55     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   358             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   361             int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                  
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   377                 uint16_t BRUCE_FG = (i == menuIdx) ? bruceConfig.bgColor : bruceConfig.priColor;                           
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   381                 tft.setTextColor(BRUCE_FG, bg);                                                                            
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   452     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                          
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   456     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   537     int footerY = tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH - 2;                                                        
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   538     tft.fillRect(7, footerY, tftWidth - 14, BRUCE_FONT_P * LH, bruceConfig.bgColor);                                       
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   760     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                          
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   806     int footY = tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH - 2;                                                          
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   807     tft.fillRect(7, footY, tftWidth - 14, BRUCE_FONT_P * LH, bruceConfig.bgColor);                                         
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   921     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                          
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   925     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   972     int footY = tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH - 2;                                                          
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                   973     tft.fillRect(7, footY, tftWidth - 14, BRUCE_FONT_P * LH, bruceConfig.bgColor);                                         
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1207             int contentY = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                           
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1211             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1232             int footerY = tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH - 2;                                                
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1233             tft.fillRect(7, footerY, tftWidth - 14, BRUCE_FONT_P * LH, bruceConfig.bgColor);                               
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1308             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1311             int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                  
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1319                 uint16_t BRUCE_FG = (i == menuIndex) ? bruceConfig.bgColor : bruceConfig.priColor;                         
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1323                 tft.setTextColor(BRUCE_FG, bg);                                                                            
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1387                         int contentY = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                               
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1389                         tft.setTextSize(BRUCE_FONT_P);                                                                     
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1411                         int footerY = tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH - 2;                                    
+C:\Bruce\src\modules\NRF24\nrf_jammer.cpp                  1412                         tft.fillRect(7, footerY, tftWidth - 14, BRUCE_FONT_P * LH, bruceConfig.bgColor);                   
+C:\Bruce\src\modules\NRF24\nrf_mousejack.cpp                607     int contentY = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4; // Below title                                                    
+C:\Bruce\src\modules\NRF24\nrf_mousejack.cpp                608     int footerH = BRUCE_FONT_P * LH + 4;                                                                                   
+C:\Bruce\src\modules\NRF24\nrf_mousejack.cpp                615     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\NRF24\nrf_mousejack.cpp                641     int footerY = tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH - 2;                                                        
+C:\Bruce\src\modules\NRF24\nrf_mousejack.cpp                642     tft.fillRect(7, footerY, tftWidth - 14, BRUCE_FONT_P * LH, bruceConfig.bgColor);                                       
+C:\Bruce\src\modules\NRF24\nrf_mousejack.cpp                782     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\NRF24\nrf_mousejack.cpp                839     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\NRF24\nrf_spectrum.cpp                  84     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\NRF24\nrf_spectrum.cpp                 116             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\NRF24\nrf_spectrum.cpp                 144     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\others\tururururu.cpp                  123     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\pwnagotchi\ui.cpp                      147     tft.setTextSize(BRUCE_FONT_G + 1);                                                                                     
+C:\Bruce\src\modules\reverseShell\reverseShell.cpp           22     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\reverseShell\reverseShell.cpp           26     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rf\emit.cpp                             21     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rf\record.cpp                           39     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rf\rf_jammer.cpp                        36             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\rf\rf_jammer.cpp                        38             int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                  
+C:\Bruce\src\modules\rf\rf_jammer.cpp                        43                 uint16_t BRUCE_FG = (i == menuIdx) ? bruceConfig.bgColor : bruceConfig.priColor;                           
+C:\Bruce\src\modules\rf\rf_jammer.cpp                        47                 tft.setTextColor(BRUCE_FG, bg);                                                                            
+C:\Bruce\src\modules\rf\rf_jammer.cpp                        64             int footerY = tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH - 2;                                                
+C:\Bruce\src\modules\rf\rf_jammer.cpp                        65             tft.fillRect(7, footerY, tftWidth - 14, BRUCE_FONT_P * LH, bruceConfig.bgColor);                               
+C:\Bruce\src\modules\rf\rf_jammer.cpp                       111     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                          
+C:\Bruce\src\modules\rf\rf_jammer.cpp                       113     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rf\rf_jammer.cpp                       172     int footerY = tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH - 2;                                                        
+C:\Bruce\src\modules\rf\rf_jammer.cpp                       182     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                          
+C:\Bruce\src\modules\rf\rf_jammer.cpp                       188     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rf\rf_jammer.cpp                       360     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                          
+C:\Bruce\src\modules\rf\rf_jammer.cpp                       366     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rf\rf_jammer.cpp                       385             int modY = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4 + max(14, tftHeight / 10) * 4;                                 
+C:\Bruce\src\modules\rf\rf_jammer.cpp                       389             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\rf\rf_jammer.cpp                       484             int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                  
+C:\Bruce\src\modules\rf\rf_jammer.cpp                       488             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\rf\rf_scan.cpp                         727         tft.setTextSize(BRUCE_FONT_P);                                                                                     
+C:\Bruce\src\modules\rf\rf_send.cpp                         361         FuriHalSubGhzPreset2FSKDev238Async, //< BRUCE_FONT_M, deviation 2.380371 kHz, asynchronous                         
+C:\Bruce\src\modules\rf\rf_send.cpp                         362         FuriHalSubGhzPreset2FSKDev476Async, //< BRUCE_FONT_M, deviation 47.60742 kHz, asynchronous                         
+C:\Bruce\src\modules\rfid\amiibo.cpp                         59     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\chameleon.cpp                     213     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\pn532ble.cpp                      388     ScrollableTextArea area(BRUCE_FONT_P, 10, 28, tftWidth - 20, tftHeight - 38);                                          
+C:\Bruce\src\modules\rfid\pn532ble.cpp                      569     ScrollableTextArea area(BRUCE_FONT_P, 10, 28, tftWidth - 20, tftHeight - 38);                                          
+C:\Bruce\src\modules\rfid\pn532ble.cpp                      664     ScrollableTextArea area(BRUCE_FONT_P, 10, 28, tftWidth - 20, tftHeight - 38);                                          
+C:\Bruce\src\modules\rfid\pn532ble.cpp                      727     ScrollableTextArea area(BRUCE_FONT_P, 10, 28, tftWidth - 20, tftHeight - 38);                                          
+C:\Bruce\src\modules\rfid\pn532ble.cpp                      918     ScrollableTextArea area(BRUCE_FONT_P, 10, 28, tftWidth - 20, tftHeight - 38);                                          
+C:\Bruce\src\modules\rfid\pn532ble.cpp                      974     ScrollableTextArea area(BRUCE_FONT_P, 10, 28, tftWidth - 20, tftHeight - 38);                                          
+C:\Bruce\src\modules\rfid\pn532ble.cpp                     1049     ScrollableTextArea area(BRUCE_FONT_P, 10, 28, tftWidth - 20, tftHeight - 38);                                          
+C:\Bruce\src\modules\rfid\pn532ble.cpp                     1106     ScrollableTextArea area(BRUCE_FONT_P, 10, 28, tftWidth - 20, tftHeight - 38);                                          
+C:\Bruce\src\modules\rfid\pn532ble.cpp                     1163     ScrollableTextArea area(BRUCE_FONT_P, 10, 28, tftWidth - 20, tftHeight - 38);                                          
+C:\Bruce\src\modules\rfid\pn532ble.cpp                     1197     ScrollableTextArea area(BRUCE_FONT_P, 10, 28, tftWidth - 20, tftHeight - 38);                                          
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp               78     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp               88     int leftX = (tftWidth - line1.length() * 6 * BRUCE_FONT_P) / 2;                                                        
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp               91     tft.setCursor(leftX, baseY + BRUCE_FONT_P * 12);                                                                       
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp               93     tft.setCursor(leftX, baseY + BRUCE_FONT_P * 24);                                                                       
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              565     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              568     tft.setCursor(tftWidth / 2 - 20, tftHeight / 2 + BRUCE_FONT_M * 10 + 5);                                               
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              591     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              595         tft.setCursor(tftWidth / 2 - 20, tftHeight / 2 + BRUCE_FONT_M * 10);                                               
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              632     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              633     tft.setCursor((tftWidth - strlen(protocol) * 6 * BRUCE_FONT_M) / 2, tftHeight / 2);                                    
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              635     tft.setCursor((tftWidth - strlen(uid) * 6 * BRUCE_FONT_M) / 2, tft.getCursorY() + 2);                                  
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              637     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              669         tft.setTextSize(BRUCE_FONT_M);                                                                                     
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              684     int slotLabelY = tftHeight / 2 + BRUCE_FONT_M * 10 + 5;                                                                
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              685     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              691     tft.fillRect(slotTextX, slotTextY, 40, BRUCE_FONT_M * 10, TFT_BLACK);                                                  
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              840     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              846     tft.fillRect(margin - 4, baseY - 4, blockW + 8, BRUCE_FONT_M * 24 + 8, TFT_BLACK);                                     
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              849     tft.setCursor(margin, baseY + BRUCE_FONT_M * 12);                                                                      
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              882     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              887     tft.fillRect(margin - 4, baseY - 4, tftWidth - margin * 2 + 8, BRUCE_FONT_M * 24 + 8, TFT_BLACK);                      
+C:\Bruce\src\modules\rfid\PN532KillerTools.cpp              890     tft.setCursor(margin, baseY + BRUCE_FONT_M * 12);                                                                      
+C:\Bruce\src\modules\rfid\rfid125.cpp                       137     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\rfid\rfid125.cpp                       139     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\rfid125.cpp                       172     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\rfid_key_attack.cpp                65     int y  = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                         
+C:\Bruce\src\modules\rfid\rfid_key_attack.cpp                68     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\rfid_key_attack.cpp               128     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\rfid_key_attack.cpp               130     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 8;                                                                          
+C:\Bruce\src\modules\rfid\srix_tool.cpp                     165     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\srix_tool.cpp                     176     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\srix_tool.cpp                     332     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\rfid\srix_tool.cpp                     419         tft.setTextSize(BRUCE_FONT_P);                                                                                     
+C:\Bruce\src\modules\rfid\srix_tool.cpp                     477     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\rfid\srix_tool.cpp                     489     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\srix_tool.cpp                     517     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\rfid\srix_tool.cpp                     519     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\srix_tool.cpp                     820     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\rfid\srix_tool.cpp                     828     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\rfid\tag_o_matic.cpp                   179     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\si5351\si5351_module.cpp               100             int y  = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               103             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               112             tft.setTextSize(BRUCE_FONT_M);                                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               116             y += BRUCE_FONT_M * LH + 4;                                                                                    
+C:\Bruce\src\modules\si5351\si5351_module.cpp               118             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               131             int footY = tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH - 2;                                                  
+C:\Bruce\src\modules\si5351\si5351_module.cpp               191     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\si5351\si5351_module.cpp               193     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 8;                                                                          
+C:\Bruce\src\modules\si5351\si5351_module.cpp               197     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\si5351\si5351_module.cpp               199     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\si5351\si5351_module.cpp               250             int y  = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               253             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               259             tft.setTextSize(BRUCE_FONT_M);                                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               262             y += BRUCE_FONT_M * LH + 4;                                                                                    
+C:\Bruce\src\modules\si5351\si5351_module.cpp               264             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               269             int footY = tftHeight - BORDER_PAD_X - BRUCE_FONT_P * LH - 2;                                                  
+C:\Bruce\src\modules\si5351\si5351_module.cpp               348             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               350             int y  = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               364                 uint16_t BRUCE_FG = (i == menuIdx) ? bruceConfig.bgColor : bruceConfig.priColor;                           
+C:\Bruce\src\modules\si5351\si5351_module.cpp               367                 tft.setTextColor(BRUCE_FG, bg);                                                                            
+C:\Bruce\src\modules\si5351\si5351_module.cpp               429     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\si5351\si5351_module.cpp               470     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\si5351\si5351_module.cpp               472     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 4;                                                                          
+C:\Bruce\src\modules\si5351\si5351_module.cpp               507             tft.setTextSize(BRUCE_FONT_M);                                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               511             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               513             tft.drawCentreString(scanning ? "SCANNING..." : "MANUAL", tftWidth / 2, y + BRUCE_FONT_M * LH + 2, 1);         
+C:\Bruce\src\modules\si5351\si5351_module.cpp               541         {"BRUCE_FM Low (88 MHz)", 88000000ULL},                                                                            
+C:\Bruce\src\modules\si5351\si5351_module.cpp               542         {"BRUCE_FM Mid (100MHz)", 100000000ULL},                                                                           
+C:\Bruce\src\modules\si5351\si5351_module.cpp               581     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\si5351\si5351_module.cpp               583     int y = BORDER_PAD_Y + BRUCE_FONT_M * LH + 8;                                                                          
+C:\Bruce\src\modules\si5351\si5351_module.cpp               586     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\si5351\si5351_module.cpp               588     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\si5351\si5351_module.cpp               618             int y  = BORDER_PAD_Y + BRUCE_FONT_M * LH + 6;                                                                 
+C:\Bruce\src\modules\si5351\si5351_module.cpp               620             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\wifi\clients.cpp                       397     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\clients.cpp                       514     int lineHeight = max(1, BRUCE_FONT_P * LH);                                                                            
+C:\Bruce\src\modules\wifi\clients.cpp                       646     int colWidth = max(1, BRUCE_FONT_P * LW);                                                                              
+C:\Bruce\src\modules\wifi\clients.cpp                       652     if (!getQueuedPromptContext().isEmpty()) usableHeight -= BRUCE_FONT_P * LH;                                            
+C:\Bruce\src\modules\wifi\clients.cpp                       653     int rowHeight = max(1, BRUCE_FONT_P * LH);                                                                             
+C:\Bruce\src\modules\wifi\clients.cpp                       661         if (tft.getCursorX() > tftWidth - TERMINAL_PAD_X - (BRUCE_FONT_P * LW)) {                                          
+C:\Bruce\src\modules\wifi\clients.cpp                       666         if (tft.getCursorY() > tftHeight - TERMINAL_PAD_Y - (BRUCE_FONT_P * LH)) {                                         
+C:\Bruce\src\modules\wifi\deauther.cpp                      203     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\karma_attack.cpp                  764     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\karma_attack.cpp                 2637     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\karma_attack.cpp                 3292             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\wifi\netcut.cpp                        588             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\wifi\responder.cpp                     201     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\responder.cpp                     203     tft.setCursor(10, BORDER_PAD_Y + BRUCE_FONT_M * LH);                                                                   
+C:\Bruce\src\modules\wifi\responder.cpp                     209     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\responder.cpp                     216     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\responder.cpp                     223     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\responder.cpp                     230     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\responder.cpp                     604             tft.setCursor(10, BORDER_PAD_Y + BRUCE_FONT_M * LH);                                                           
+C:\Bruce\src\modules\wifi\responder.cpp                     605             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\wifi\responder.cpp                     609             tft.setCursor(10, BORDER_PAD_Y + BRUCE_FONT_M * LH);                                                           
+C:\Bruce\src\modules\wifi\responder.cpp                     610             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\wifi\responder.cpp                     614             tft.setCursor(10, BORDER_PAD_Y + BRUCE_FONT_M * LH);                                                           
+C:\Bruce\src\modules\wifi\responder.cpp                     615             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\wifi\sniffer.cpp                       984     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\sniffer.cpp                       986     tft.setCursor(10, BORDER_PAD_Y + BRUCE_FONT_M * LH);                                                                   
+C:\Bruce\src\modules\wifi\sniffer.cpp                      1181             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\wifi\socks4_proxy.cpp                   91     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\socks4_proxy.cpp                   93     tft.setCursor(10, BORDER_PAD_Y + BRUCE_FONT_M * LH);                                                                   
+C:\Bruce\src\modules\wifi\tcp_utils.cpp                      26     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\tcp_utils.cpp                      32     tft.setCursor(10, BORDER_PAD_Y + BRUCE_FONT_M * LH);                                                                   
+C:\Bruce\src\modules\wifi\tcp_utils.cpp                      57                     tft.setTextSize(BRUCE_FONT_P);                                                                         
+C:\Bruce\src\modules\wifi\tcp_utils.cpp                      59                     tft.setCursor(10, BORDER_PAD_Y + BRUCE_FONT_M * LH);                                                   
+C:\Bruce\src\modules\wifi\tcp_utils.cpp                     101     tft.setTextSize(BRUCE_FONT_P);                                                                                         
+C:\Bruce\src\modules\wifi\tcp_utils.cpp                     104     tft.setCursor(10, BORDER_PAD_Y + BRUCE_FONT_M * LH);                                                                   
+C:\Bruce\src\modules\wifi\tcp_utils.cpp                     123             tft.setTextSize(BRUCE_FONT_P);                                                                                 
+C:\Bruce\src\modules\wifi\tcp_utils.cpp                     125             tft.setCursor(10, BORDER_PAD_Y + BRUCE_FONT_M * LH);                                                           
+C:\Bruce\src\modules\wifi\wifi_atks.cpp                     612     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\src\modules\wifi\wifi_atks.cpp                     765     tft.setTextSize(BRUCE_FONT_M);                                                                                         
+C:\Bruce\include\MenuItemInterface.h                         99         int titleY = iconCenterY + iconAreaH / 2 + BRUCE_FONT_G;                                                           
+C:\Bruce\include\MenuItemInterface.h                        101         tft.setTextSize(BRUCE_FONT_M);                                                                                     
+C:\Bruce\include\MenuItemInterface.h                        103         tft.fillRect(arrowAreaX, titleY, tftWidth - 2 * arrowAreaX, LH * BRUCE_FONT_M, bruceConfig.bgColor);               
+C:\Bruce\include\MenuItemInterface.h                        104         int nchars = (tftWidth - 16) / (LW * BRUCE_FONT_M);                                                                
+C:\Bruce\include\precompiler_flags.h                         63 #ifndef BRUCE_FONT_P                  // Small Font -> Font Pequena                                                        
+C:\Bruce\include\precompiler_flags.h                         64   #define BRUCE_FONT_P 1                                                                                                   
+C:\Bruce\include\precompiler_flags.h                         66 #ifndef BRUCE_FONT_M                  // Medium Font -> Fonte Media                                                        
+C:\Bruce\include\precompiler_flags.h                         67   #define BRUCE_FONT_M 2                                                                                                   
+C:\Bruce\include\precompiler_flags.h                         69 #ifndef BRUCE_FONT_G                  // LArge Font -> Fonte Grande                                                        
+C:\Bruce\include\precompiler_flags.h                         70   #define BRUCE_FONT_G 3                                                                                                   
+C:\Bruce\include\tftLogger.h                                126     void drawWideLine(float ax, float ay, float bx, float by, float wd, int32_t BRUCE_FG, int32_t bg = 0x00FFFFFF);        
+C:\Bruce\include\tftLogger.h                                127     void drawFastVLine(int32_t x, int32_t y, int32_t h, int32_t BRUCE_FG);                                                 
+C:\Bruce\include\tftLogger.h                                128     void drawFastHLine(int32_t x, int32_t y, int32_t w, int32_t BRUCE_FG);                                                 
+
+
