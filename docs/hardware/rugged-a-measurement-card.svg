@@ -2,7 +2,7 @@
   <rect width="1000" height="700" fill="#111"/>
   <g font-family="Arial" fill="#eaffdf">
     <text x="30" y="35" font-size="26">Rugged A1 — karta pomiarowa</text>
-    <text x="30" y="65" font-size="15" fill="#ffcc66">Nie używaj zdjęcia jako skali. Zmierz suwmiarką i wpisz mm do SCAD.</text>
+    <text x="30" y="65" font-size="15" fill="#ffcc66">PHOTO_ESTIMATE z maty — nie używaj jako skali. Zmierz suwmiarką.</text>
     <rect x="90" y="130" width="300" height="430" fill="#222" stroke="#39ff14" stroke-width="3"/>
     <rect x="135" y="190" width="210" height="300" fill="#050805" stroke="#b7ff9a" stroke-width="2"/>
     <text x="120" y="110" font-size="16">TPM408 PCB: W/H/T</text>
@@ -18,8 +18,8 @@
     <text x="105" y="650" font-size="15">wysokość headera i zapas przewodów</text>
     <rect x="650" y="350" width="230" height="112" rx="8" fill="#333" stroke="#b7ff9a" stroke-width="2"/>
     <text x="680" y="395" font-size="19">ESP32-S3</text>
-    <text x="680" y="420" font-size="14">57.15 × 27.94 mm</text>
-    <text x="680" y="442" font-size="14">reference — verify</text>
+    <text x="680" y="420" font-size="14">PHOTO_ESTIMATE 58 × 28 mm</text>
+    <text x="680" y="442" font-size="14">reference 57.15 × 27.94 — verify</text>
     <text x="585" y="315" font-size="16">F — oba USB-C:</text>
     <text x="585" y="338" font-size="16">środki X/Y, szerokość,</text>
     <text x="585" y="361" font-size="16">wysokość i głębokość wtyku</text>

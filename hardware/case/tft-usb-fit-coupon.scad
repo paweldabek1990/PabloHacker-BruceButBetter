@@ -2,13 +2,13 @@
 // STATUS: must be parameterized from caliper measurements before export.
 // This is intentionally not the final enclosure.
 
-// MEASURE_REQUIRED: enter real values from the TPM408 and ESP32 carrier.
-tft_hole_spacing_x = 66.0;
-tft_hole_spacing_y = 95.0;
+// PHOTO_ESTIMATE: supplied photographs only; replace with caliper values.
+tft_hole_spacing_x = 42.0; // transverse spacing MEASURE_REQUIRED
+tft_hole_spacing_y = 80.5; // PHOTO_ESTIMATE from supplied ~79–82 mm
 tft_hole_d = 3.2;
 tft_window_w = 58.0;
 tft_window_h = 78.0;
-usb_center_spacing = 30.0; // MEASURE_REQUIRED between the two USB-C centers
+usb_center_spacing = 9.0; // MEASURE_REQUIRED; both ports appear on one end
 usb_w = 10.0;
 usb_h = 5.0;
 plate_t = 3.0;
@@ -26,7 +26,7 @@ difference() {
     // Active-window test aperture.
     translate([(plate_w-tft_window_w)/2,(plate_h-tft_window_h)/2,-1])
         cube([tft_window_w,tft_window_h,plate_t+2]);
-    // Two USB-C gauge slots; position/orientation must be adjusted to the real carrier.
+    // Two same-end USB-C gauge slots; position/orientation must be measured.
     translate([(plate_w-usb_center_spacing)/2-usb_w/2, -1, 0]) cube([usb_w,edge+2,usb_h]);
     translate([(plate_w+usb_center_spacing)/2-usb_w/2, -1, 0]) cube([usb_w,edge+2,usb_h]);
 }

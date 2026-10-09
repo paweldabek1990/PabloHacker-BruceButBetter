@@ -22,7 +22,7 @@ All values marked `MEASURE_REQUIRED` in the SCAD file are placeholders. Do not p
 
 No STL is committed because OpenSCAD is not installed in the current environment and an STL generated from unverified dimensions would be misleading. After measurements are entered, export A1 and A2 from OpenSCAD and record the slicer settings.
 
-The only populated mechanical reference is the published YD-ESP32-S3 envelope 57.15 × 27.94 mm and 2.54 mm header pitch from [ESPboards.dev](https://www.espboards.dev/esp32/yd-esp32-s3/). Verify it against the user's board before relying on it.
+The CAD now includes `PHOTO_ESTIMATE` values from the supplied mat photographs: TFT PCB about 52 × 89 mm, longitudinal hole spacing about 80.5 mm, ESP32 about 58 × 28 mm, and stylus about 79.5 mm long with 6.5 mm maximum diameter. These are not verified mounting dimensions. The published YD-ESP32-S3 envelope 57.15 × 27.94 mm and 2.54 mm header pitch remains a separate reference from [ESPboards.dev](https://www.espboards.dev/esp32/yd-esp32-s3/).
 
 ## Material and print assumptions
 
