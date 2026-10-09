@@ -36,3 +36,4 @@ flash-logs/
 hardware/case/generated/*.log
 hardware/case/generated/
 Bruce-*.bin
+tools/gh-portable/
