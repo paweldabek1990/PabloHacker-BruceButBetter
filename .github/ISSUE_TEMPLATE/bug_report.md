@@ -1,24 +1,24 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
-
+about: Report a reproducible firmware, display, touch, or hardware issue
+title: "[bug] "
+labels: bug
 ---
 
-**Describe the bug:**
-<!-- A clear and concise description of what the bug is. -->
+## Hardware
 
-**Steps To Reproduce:**
-<!-- Steps to reproduce the behavior. -->
-- Device used: 
+- Board/model and revision:
+- Display/controller:
+- GPIO changes from `docs/hardware/pinout.md`:
 
-**Expected behavior:**
-<!-- A clear and concise description of what you expected to happen. -->
+## Reproduction
 
-**Actual behavior:**
-<!-- A clear and concise description of what actually happened. -->
+1.
+2.
+3.
 
-**Additional context / logs:**
-<!-- Add any other context and/or logs about the problem here. -->
+## Expected / actual result
+
+## Evidence
+
+Attach sanitized runtime logs or photos. Never attach credentials, captured traffic, or private network identifiers.

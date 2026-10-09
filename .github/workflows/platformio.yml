@@ -1,0 +1,32 @@
+name: PlatformIO build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.platformio
+            .pio
+          key: ${{ runner.os }}-pio-${{ hashFiles('platformio.ini', 'boards/**/*.ini') }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PlatformIO
+        run: python -m pip install platformio
+      - name: Build ESP32-S3 touch target
+        run: pio run -e esp32-s3-n16r8-ili9341-touch
+      - name: Upload merged firmware artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bruce-pablo-esp32-s3-ili9341-touch
+          path: |
+            Bruce-esp32-s3-n16r8-ili9341-touch.bin
+            .pio/build/esp32-s3-n16r8-ili9341-touch/firmware.bin

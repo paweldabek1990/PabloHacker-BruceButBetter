@@ -1,406 +1,60 @@
-<div align="center">
+# Pablo Hacker — BruceButBetter
 
-<img src="assets/banner.svg" alt="Bruce But Better" width="100%">
+Unofficial hardware variant of [BruceButBetter](https://github.com/Yoursel71/BruceButBetter) for an ESP32-S3-WROOM-1 N16R8 with a 2.8-inch ILI9341 TFT and XPT2046 resistive touch controller. The full Bruce source tree is retained; this repository adds a reproducible DIY hardware target.
 
-# BRUCE BUT BETTER — ESP32-S3 DIY TOUCH
+> Security features are for authorized testing, education, and devices/networks you own.
 
-**Downstream build of the [Bruce](https://github.com/pr3y/Bruce) firmware for a hand-built ESP32-S3 multitool with a 2.8-inch ILI9341/XPT2046 display.**
+## Status
 
-Sub-GHz · NFC/RFID · IR · WiFi/BLE · NRF24 · Si5351 signal generator — one device, one binary.
+The target `esp32-s3-n16r8-ili9341-touch` builds, boots into the full menu, uses Terminal Green, and supports touch navigation. ILI9341 color/text and XPT2046 coordinate tests were physically confirmed. The last firmware was flashed and verified on an ESP32-S3 over COM18. The latest RGB565 bitmap byte-order fix still requires final physical color confirmation.
 
-<br>
+## Hardware and GPIO
 
-[![Based on Bruce](https://img.shields.io/badge/FORK_OF-pr3y%2FBruce-2ea043?style=for-the-badge&logo=github&logoColor=white)](https://github.com/pr3y/Bruce)
-[![ESP32-S3](https://img.shields.io/badge/ESP32--S3-N16R8-1f6feb?style=for-the-badge&logo=espressif&logoColor=white)](https://www.espressif.com/en/products/socs/esp32-s3)
-[![PlatformIO](https://img.shields.io/badge/PLATFORMIO-ARDUINO-0d1117?style=for-the-badge&logo=platformio&logoColor=FF7F00)](https://platformio.org/)
-[![AGPL v3](https://img.shields.io/badge/LICENSE-AGPL_v3-8b949e?style=for-the-badge)](./LICENSE)
+- ESP32-S3-WROOM-1 N16R8: 16 MB flash, 8 MB PSRAM, two USB-C connectors.
+- TPM408-2.8: ILI9341, 240×320, resistive XPT2046 touch, SD slot.
+- Shared SPI: GPIO11 MOSI, GPIO12 SCK, GPIO13 MISO.
 
-[![Stars](https://img.shields.io/github/stars/Yoursel71/BruceButBetter?style=flat-square&color=2ea043&logo=github&label=stars)](https://github.com/Yoursel71/BruceButBetter/stargazers)
-[![Forks](https://img.shields.io/github/forks/Yoursel71/BruceButBetter?style=flat-square&color=1f6feb&logo=github&label=forks)](https://github.com/Yoursel71/BruceButBetter/network/members)
-[![Issues](https://img.shields.io/github/issues/Yoursel71/BruceButBetter?style=flat-square&color=f78166&label=issues)](https://github.com/Yoursel71/BruceButBetter/issues)
-[![Last commit](https://img.shields.io/github/last-commit/Yoursel71/BruceButBetter?style=flat-square&color=6e7681&label=last%20commit)](https://github.com/Yoursel71/BruceButBetter/commits)
+| Signal | GPIO | Module pin | Evidence |
+|---|---:|---|---|
+| TFT SCK / touch T_CLK | 12 | SCK / T_CLK | physical |
+| TFT MOSI / touch T_DIN | 11 | SDA/MOSI / T_DIN | physical |
+| TFT MISO / touch T_DO | 13 | SDO/MISO / T_DO | physical |
+| TFT CS | 15 | CS | physical |
+| TFT DC | 17 | DC | physical |
+| TFT RESET | 16 | RST | physical |
+| Touch CS | 10 | T_CS | physical |
+| Touch IRQ | — | T_IRQ | NC |
+| Power | 3V3/GND | VCC/LED/GND | physical |
+| SD CS | 14 | SD CS | configured, unverified |
 
-**[ BUILD YOUR OWN ](./docs/BUILD.md)** ·
-**[ WEB FLASHER ](https://Yoursel71.github.io/BruceButBetter/)** ·
-**[ RELEASES ](https://github.com/Yoursel71/BruceButBetter/releases)** ·
-**[ CONTRIBUTE ](./CONTRIBUTING.md)** ·
-**[ REPORT A BUG ](https://github.com/Yoursel71/BruceButBetter/issues/new/choose)**
+See [HARDWARE_WIRING.md](HARDWARE_WIRING.md), [pinout](docs/hardware/pinout.md), [SVG](docs/hardware/wiring.svg), and [reassembly checklist](docs/hardware/reassembly-checklist.md). GPIO15/16 also occur in inherited button definitions; CC1101 CS is overridden to GPIO3 for this target.
 
-</div>
+## Features and evidence
 
-```
-   ESP32-S3 N16R8  ·  16 MB Flash  ·  8 MB PSRAM  ·  Dual USB-C  ·  Runtime-probed modules
-```
+The source contains Wi-Fi, BLE, USB/HID, Sub-GHz/CC1101, NRF24, PN532/RFID, IR, Si5351, filesystem, Ethernet, GPS, LoRa, and other Bruce modules. Compilation proves inclusion, not physical operation. Physically exercised: display, touch, full menu navigation, Wi-Fi scan/navigation, Terminal Green, and splash timing. RF, NFC/RFID, IR, SD, optional radios, and Bruce App mirroring remain unverified.
 
----
+## Build and flash
 
-A hand-built ESP32-S3 multitool — not a Flipper Zero. This repository is a downstream fork of the
-[Bruce](https://github.com/pr3y/Bruce) firmware, adapted to custom hardware: shared SPI/I²C backbone,
-dual USB-C, and an added Si5351 signal-generator module. One binary covers the compiled feature set.
-
-> **Hardware status:** The ILI9341 colour/text test, XPT2046 response, boot, menu navigation and Wi-Fi scanning were physically verified. Submenu geometry is still under validation. Optional peripherals are not claimed as physically tested unless listed in [docs/PROJECT_STATUS.md](docs/PROJECT_STATUS.md).
-
-The maintained PlatformIO target is `esp32-s3-n16r8-ili9341-touch`. The original `C:\Bruce` checkout is not part of this repository. See [docs/BUILD.md](docs/BUILD.md) for reproducible builds.
-
-> **Legal notice** — For **authorized** security testing and education only. Distributed under AGPL.
-> Unauthorized or malicious use is prohibited. You assume all responsibility.
-
----
-
-## 🔧 Build one yourself (~$40)
-
-Want this device? The full **[DIY build guide →](./docs/BUILD.md)** has the bill of materials with
-purchase links, a wiring diagram, step-by-step assembly, and one-click flashing. Start with the
-ESP32-S3 + screen + buttons (~$13), add radios when you want them.
-
-| Tier | Parts | Cost |
-|---|---|---|
-| Minimum (UI) | ESP32-S3 + ILI9341/XPT2046 + buttons | cost not finalized |
-| Recommended | + CC1101 + PN532 + IR + microSD | ~$25 |
-| Full | + 2× NRF24 + Si5351 + battery | ~$40 |
-
----
-
-## WHAT'S DIFFERENT FROM BRUCE
-
-This is **not** a re-skin. It's a downstream fork built around one purpose-made DIY device, with extra
-modules wired in on top of upstream Bruce.
-
-### Purpose-built hardware target — `esp32-s3-n16r8-ili9341-touch`
-- **ESP32-S3 N16R8** (16 MB flash / 8 MB PSRAM), **2.8" ILI9341 240×320 TFT + XPT2046 touch**, dual USB-C.
-- Fixed module loadout on a shared SPI/I²C backbone: **CC1101 + PN532 + 2× NRF24 + Si5351 + IR + SD**.
-- UI uses the portrait 240×320 panel with a reserved touch footer; geometry fixes are tracked in `DIAGNOSTYKA.md`.
-- **Trimmed** for the small build: GPS, LoRa, Ethernet and FM are compiled out (`-DDISABLE_*`).
-- Upstream's commercial boards (M5Stack / Lilygo / CYD …) are **still build-able** here — see
-  [Supported Boards](#supported-boards) — but this DIY Touch target is the maintained, build-verified target.
-
-### Added modules (wired into the menus, not in upstream)
-| Feature | What it does |
-|---|---|
-| **Si5351 signal generator** | Clean RF 8 kHz–160 MHz on CLK0/1/2, frequency sweep, AM band |
-| **NRF24 ESB sniffer** | Capture Enhanced-ShockBurst 2.4 GHz traffic |
-| **BLE tracker** | Track/monitor nearby BLE devices |
-| **IR replay** | Capture and re-transmit IR signals |
-| **RFID key attack** | Key-recovery attack flow on the RFID menu |
-| **Custom boot logo** | Branded splash on startup |
-
-### New firmware features (not in upstream)
-| Feature | What it does |
-|---|---|
-| **Hardware Self-Test** | Top-level menu that probes the **I²C and SPI buses** and reports every module that answers — OLED/PN532/Si5351/RTC/sensors with `[OK] 0xNN`, plus microSD and both NRF24 radios `[OK]/[--]`. Verify your wiring/soldering in seconds. |
-| **Si5351 live calibration** | Outputs a 10 MHz reference on CLK0 and lets you trim the crystal correction (ppb, variable step) live to zero-beat against a known source. |
-| **Si5351 favorites** | Save/recall your CLK0 frequencies from RF Gen → *Favorites*; persisted to `/si5351_fav.txt` on LittleFS (survives reboot). |
-| **Dual-NRF24 spectrum** | When a second NRF24 is populated, the 2.4 GHz analyzer scans odd channels on radio 2 in parallel with radio 1's even channels — ~2× faster sweep (`2x` badge). Auto-falls back to single radio. |
-| **CC1101 peak-hold spectrum** | The sub-GHz RSSI analyzer keeps a peak-hold cap above each bar so brief signals stay on screen, and the Max readout shows the strongest signal's dBm next to its frequency. |
-| **Spectrum → CSV capture** | RF → *Spectrum → CSV* sweeps the selected sub-GHz range and logs `freq_mhz,rssi_dbm` for every step to `/BruceRF/spectrum_<ms>.csv` — pull the SD and analyse the band on your PC. |
-| **NRF24 spectrum → CSV** | NRF24 → *Spectrum → CSV* samples the 2.4 GHz band and logs `channel,freq_mhz,activity` for all 80 channels to `/BruceRF/nrf_spectrum_<ms>.csv`, with the busiest channel reported. |
-
-Plot either capture on your PC with [`tools/plot_spectrum.py`](tools/plot_spectrum.py) (`python tools/plot_spectrum.py spectrum_<ms>.csv`).
-
-### Packaging
-- A merged binary is produced by PlatformIO for the maintained target. No browser flasher or release artifact is claimed until a repository is published and verified.
-- Device advertises as **`BruceButBetter`** on USB / BLE / screen where the corresponding subsystem is enabled.
-
-> Everything else tracks upstream [Bruce](https://github.com/pr3y/Bruce); useful changes are meant to flow
-> back upstream via PR.
-
----
-
-## DOWNLOAD / FLASH
-
-> The **web flasher now flashes any of 45 boards** — pick yours from the board selector and flash from
-> the browser (chip family auto-matched per image; no toolchain). The same merged `Bruce-<board>.bin`
-> images are on the [latest release](https://github.com/Yoursel71/BruceButBetter/releases/latest) for
-> manual `esptool` flashing too. Only the `esp32-c5` variants and `arduino-nesso-n1` build from source.
-
-### Browser flasher (recommended)
-
-**[Yoursel71.github.io/BruceButBetter](https://Yoursel71.github.io/BruceButBetter/)**
-
-Open in desktop Chrome/Edge, **pick your board**, connect via the **left USB-C** (UART), click **Flash**. No toolchain needed.
-
-### Manual
-
-Latest builds: **[Releases](https://github.com/Yoursel71/BruceButBetter/releases/tag/v1.0.0)**
-
-Single file (merged — bootloader + partitions + boot_app0 + firmware, offset `0x0`):
-
-```sh
-esptool.py --chip esp32s3 --port COMx write_flash 0x0 Bruce-esp32-s3-N16R8.bin
+```powershell
+pio run -e esp32-s3-n16r8-ili9341-touch
 ```
 
-Separate components:
+The project pins pioarduino release 55.03.36 / Arduino-ESP32 3.3.6. The merged image is `Bruce-esp32-s3-n16r8-ili9341-touch.bin`. Identify the board with `esptool chip-id` first; the previous confirmed device was ESP32-S3, VID `303A`, PID `1001`, COM18. Never assume the port, flash an ESP32-CAM, use `erase_flash`, or erase NVS.
 
-```sh
-esptool.py --chip esp32s3 --port COMx write_flash \
-  0x0      bootloader.bin \
-  0x8000   partitions.bin \
-  0xe000   boot_app0.bin \
-  0x10000  firmware.bin
-```
+## Pablo Hacker splash
 
-> Linux/Mac: use `/dev/ttyACM0` or `/dev/ttyUSB0` instead of `COMx`. Flash over the **left USB-C** (UART) port.
+The 160×155 RGB565 `PROGMEM` asset is [src/assets/pablo_logo.h](src/assets/pablo_logo.h). `src/main.cpp::boot_screen()` draws it on the 240×320 panel, then `PABLO HACKER` and `PABLO SIGNAL`, preserving approximately 3.2 seconds. [Preview](docs/assets/pablo-splash-preview.png) is not physical proof.
 
-| File | Offset | Purpose |
-|---|---|---|
-| `Bruce-esp32-s3-N16R8.bin` | `0x0` | Merged (all-in-one) |
-| `bootloader.bin` | `0x0` | Bootloader |
-| `partitions.bin` | `0x8000` | Partition table |
-| `boot_app0.bin` | `0xe000` | OTA selector |
-| `firmware.bin` | `0x10000` | Application |
+## Documentation
 
-**Other boards** — the release also has a merged `Bruce-<board>.bin` for 45 targets (Cardputer, CYD,
-Lilygo, M5Stack, Marauder, Elecrow …). Flash it the same way; use `--chip esp32` for classic-ESP32
-boards or `--chip esp32s3` for S3 boards:
+[DIAGNOSTYKA.md](DIAGNOSTYKA.md) · [CHANGELOG.md](CHANGELOG.md) · [KNOWN_ISSUES.md](KNOWN_ISSUES.md) · [build guide](docs/software/build.md) · [validation](docs/testing/validation-status.md) · [Bruce App analysis](docs/hardware/remote-diagnostics.md) · [CONTRIBUTING.md](CONTRIBUTING.md)
 
-```sh
-esptool.py --chip <esp32|esp32s3> --port COMx write_flash 0x0 Bruce-<board>.bin
-```
+The audit of the local checkout, commits, tests, and publication hygiene is in [docs/software/repository-audit.md](docs/software/repository-audit.md).
 
----
+## Actions and roadmap
 
-## HARDWARE
+`.github/workflows/platformio.yml` builds the real target and uploads artifacts; it has not been run on GitHub and never flashes hardware. Roadmap: confirm bitmap colors physically, test SD/peripherals, test Bruce App compatibility, resolve inherited GPIO ambiguities, then prepare a private GitHub repository.
 
-### Main board
+## Provenance and license
 
-- **ESP32-S3 N16R8** — 16 MB QSPI Flash, 8 MB OPI PSRAM
-- Dual USB-C: **Left** = UART/programming, **Right** = Native USB (Bad USB / HID)
-
-### Modules
-
-| Module | Function |
-|---|---|
-| CC1101 | Sub-GHz 300–928 MHz |
-| PN532 | NFC 13.56 MHz + RFID |
-| NRF24L01 ×2 | 2.4 GHz · MouseJack · jammer |
-| Si5351 | Signal generator 8 kHz–160 MHz |
-| MicroSD | File storage |
-| OLED 1.3" SH1106 (SSD1106G) | Display |
-| VS1838B | IR receiver 38 kHz |
-| IR LED + 2N2222 | IR transmitter |
-| Passive buzzer | Sound |
-| 6× buttons | Navigation |
-
----
-
-## PINOUT
-
-I²C (shared) — OLED `0x3C`, PN532 `0x24`, Si5351 `0x60`:
-
-```
-IO8  = SDA
-IO18 = SCL
-```
-
-SPI (shared bus) — CC1101 + MicroSD + NRF24 ×2:
-
-```
-IO11 = MOSI
-IO12 = SCK
-IO13 = MISO
-```
-
-CS / control pins (unique, no conflict):
-
-```
-CC1101    GDO0=IO9   CS=IO10
-MicroSD   CS=IO14
-NRF24 #1  CE=IO4     CSN=IO5
-NRF24 #2  CE=IO6     CSN=IO7
-IR        RX=IO1     TX=IO2
-Buzzer    IO47
-```
-
-Buttons (to GND, pull-up):
-
-```
-UP=IO15  DOWN=IO16  LEFT=IO38  RIGHT=IO39  OK=IO40  BACK=IO41
-```
-
-**RESERVED — do not use (bricks the board):**
-
-```
-GPIO 26-32  -> QSPI Flash
-GPIO 33-37  -> OPI PSRAM (forbidden on N16R8)
-GPIO 19-20  -> Native USB D+/D- (reserved for Bad USB)
-GPIO 45-46  -> Strapping
-GPIO 43-44  -> UART0 TX/RX (debug)
-```
-
----
-
-## BUILD FROM SOURCE
-
-Requires [PlatformIO](https://platformio.org/).
-
-```sh
-# Build
-pio run -e esp32-s3-devkitc-1-psram
-
-# Build + upload
-pio run -e esp32-s3-devkitc-1-psram -t upload
-
-# Serial monitor
-pio device monitor
-```
-
-Output: `.pio/build/esp32-s3-devkitc-1-psram/firmware.bin`. Active board set by `default_envs` in `platformio.ini`.
-
-> **One binary, mixed hardware** — modules are probed at runtime. A missing chip shows a "not found"
-> message and returns to the menu instead of crashing. Flash the same binary regardless of which
-> optional modules are populated.
-
----
-
-## SUPPORTED BOARDS
-
-The default build targets the custom **ESP-General** DIY hardware. The **full upstream Bruce board
-matrix** is also ported in — build any with `pio run -e <env>`. Common targets:
-
-> ✓ **45 of these ship a prebuilt, ready-to-flash `Bruce-<env>.bin`** in the
-> [latest release](https://github.com/Yoursel71/BruceButBetter/releases/latest) — no toolchain needed
-> (see [Download / Flash](#download--flash)). Only the `esp32-c5` variants and `arduino-nesso-n1`
-> still build from source.
-
-| Board | Build env (`-e`) | Notes |
-|---|---|---|
-| **DIY ESP32-S3 N16R8** | `esp32-s3-devkitc-1-psram` | **Primary** — this project's board (default) |
-| M5Stack Cardputer | `m5stack-cardputer` | Keyboard handheld (build-verified ✓) |
-| M5StickC Plus2 / Plus1.1 | `m5stack-cplus2` / `m5stack-cplus1_1` | Compact stick |
-| M5Stack CoreS3 / Core / Core2 | `m5stack-cores3` | Core family |
-| M5Stack StickS3 / DinMeter | `m5stack-sticks3` / `m5stack-dinmeter` | |
-| CYD (ESP32-2432S028) | `CYD-2432S028` | Cheap Yellow Display; many CYD variants in the `.ini` |
-| Lilygo T-Embed CC1101 | `lilygo-t-embed-cc1101` | Built-in Sub-GHz |
-| Lilygo T-Deck / T-Watch / T-Display S3 | `lilygo-t-deck` / `lilygo-t-watch-s3` / `lilygo-t-display-s3` | |
-| Lilygo T-HMI / T-LoRa-Pager | `lilygo-t-hmi` / `lilygo-t-lora-pager` | |
-| ESP32-C5 | `esp32-c5` | Dual-band RISC-V |
-| Marauder / Phantom / Reaper / xk404 | `Marauder-Mini` / `Phantom_S024R` / `reaper` / `xk404` | Custom PCBs |
-
-Full list: every dir under [`boards/`](./boards) (run `pio project config` to enumerate envs).
-
-Boards auto-register via the `extra_configs` glob in `platformio.ini` — drop a `boards/<name>/` dir in
-and it appears. Pin maps live in each `boards/<name>/pins_arduino.h`; features degrade gracefully when a
-chip is absent, so a single build runs across mixed hardware. Adding a board? See [`boards/README.md`](./boards/README.md).
-
-> Board configs are ported from upstream [Bruce](https://github.com/pr3y/Bruce). **ESP-General is the DIY
-> target actively maintained and build-verified here** (plus Cardputer); the rest are byte-identical to
-> upstream and track it — not individually hardware-tested in this fork.
-
----
-
-## CAPABILITIES
-
-Nine attack/utility modules. Quick map, then the detail:
-
-| Domain | Contents |
-|---|---|
-| **WiFi** | AP/scan, Beacon spam, Deauth, Evil Portal, Wardriving, Sniffer, ARP spoof/poison, Responder |
-| **BLE** | Scan, Bad BLE (Ducky), iOS/Windows/Samsung/Android spam |
-| **Sub-GHz (CC1101)** | Scan/Copy, Custom SubGhz, Spectrum, Replay, Jammer |
-| **NFC/RFID (PN532)** | Read/Clone/Write, NDEF, Chameleon, Amiibolink |
-| **IR** | TV-B-Gone, Receiver, Custom IR (NEC, SIRC, RC5/6, Samsung32) |
-| **NRF24** | Jammer, 2.4G Spectrum, Mousejack |
-| **Si5351** | Frequency generation 8 kHz–160 MHz (CLK0/1/2), sweep, AM band |
-| **Bad USB** | Ducky scripts (right USB-C / Native USB) |
-| **Other** | JS interpreter, WebUI, SD/LittleFS manager, QR, iButton |
-
-### WiFi
-
-- **Deauth** — disconnect clients from a target AP (802.11 deauth frames).
-- **Beacon spam** — flood the air with fake SSIDs.
-- **Evil Portal** — captive-portal credential harvesting.
-- **Sniffer** — capture raw 802.11 / probe-request traffic.
-- **Wardriving** — log nearby APs with GPS (if attached).
-- **ARP spoof/poison + Responder** — LAN man-in-the-middle, DHCP starvation.
-- **AP / scan** — host an access point or enumerate networks.
-
-### BLE
-
-- **Spam** — flood iOS, Windows, Samsung, Android with pairing pop-ups.
-- **Bad BLE** — wireless Ducky / HID keystroke injection over Bluetooth.
-- **Scan** — enumerate nearby BLE devices.
-
-### Sub-GHz (CC1101, 300–928 MHz)
-
-- **Jammer** — flood a Sub-GHz band (garage doors, remotes, 433 MHz gear).
-- **Scan / Copy + Replay** — capture a remote's signal and re-transmit it.
-- **Custom SubGhz** — transmit arbitrary frequency / modulation.
-- **Spectrum** — live Sub-GHz analyzer.
-
-### NFC / RFID (PN532, 13.56 MHz)
-
-- **Read / Clone / Write** — dump cards and copy to blanks.
-- **NDEF** — read/write NFC data records.
-- **Chameleon + Amiibolink** — card emulation.
-
-### Infrared
-
-- **Jammer** — flood IR receivers with noise.
-- **TV-B-Gone** — power off most TVs with one button.
-- **Receiver** — decode and save remote signals.
-- **Custom IR** — transmit NEC, SIRC, RC5/6, Samsung32 and more.
-
-### NRF24 (2.4 GHz, ×2)
-
-- **Jammer** — flood the 2.4 GHz band (WiFi/BLE/devices in range).
-- **Mousejack** — inject keystrokes into vulnerable wireless mice/keyboards.
-- **2.4G Spectrum** — live 2.4 GHz analyzer.
-
-### Si5351 signal generator
-
-- **Frequency gen** — clean output 8 kHz–160 MHz on CLK0 / CLK1 / CLK2.
-- **Sweep** — scan across a frequency range.
-- **AM band** — generate AM-radio carriers.
-
-### Bad USB
-
-- **Ducky scripts** — keystroke injection over native USB (right USB-C / HID).
-
-### Extras
-
-- JavaScript interpreter, WebUI control panel, SD / LittleFS file manager, QR codes, iButton.
-
-> **Operational warning** — jammers and deauth are illegal to operate against equipment you do not own
-> in most jurisdictions (RF-interference / unauthorized-access laws). Use only on your own hardware in a
-> controlled environment, or where you hold written authorization.
-
----
-
-## CONTRIBUTING
-
-Bug fixes, new modules, board ports, docs — all welcome. Full guide: **[CONTRIBUTING.md](./CONTRIBUTING.md)**.
-
-1. Fork, branch: `git checkout -b feature/my-change`
-2. Confirm it compiles: `pio run -e esp32-s3-devkitc-1-psram`
-3. Format C/C++ with `clang-format` (config in `.clang-format`)
-4. Commit, push, open a Pull Request
-5. Bug or idea? [Open an issue](https://github.com/Yoursel71/BruceButBetter/issues/new/choose)
-
-Adding hardware? Pin maps live in `boards/ESP-General/pins_arduino.h`; a new module goes under
-`src/modules/<name>/` with its menu in `src/core/menu_items/`.
-
----
-
-## CREDITS
-
-Downstream fork of the [**Bruce**](https://github.com/pr3y/Bruce) firmware. All upstream credit to
-[@pr3y](https://github.com/pr3y), [@bmorcelli](https://github.com/bmorcelli), and the Bruce contributors.
-Improvements made here are intended to flow back upstream where useful.
-
-- Upstream: https://github.com/pr3y/Bruce
-- Project site: https://bruce.computer
-- Wiki: https://wiki.bruce.computer
-- Discord: https://discord.gg/WJ9XF9czVT
-
-## LICENSE
-
-AGPL — see [LICENSE](./LICENSE).
-# ESP32-S3 DIY Touch variant
-
-This working tree is an unofficial hardware variant of BruceButBetter for an ESP32-S3-WROOM-1 N16R8 with a 2.8-inch ILI9341 240x320 SPI display and XPT2046 resistive touch controller. It preserves the full Bruce firmware tree; it is not a reduced demonstration program.
-
-Hardware wiring, build instructions, verification boundaries and known issues are documented in [HARDWARE.md](HARDWARE.md), [BUILD.md](BUILD.md) and [KNOWN_ISSUES.md](KNOWN_ISSUES.md). The detailed engineering log remains in [DIAGNOSTYKA.md](DIAGNOSTYKA.md).
-
-The LCD color/text test and basic touch response are physically confirmed. Optional radio, RFID, NFC, IR, SD and other peripherals are not claimed as physically verified merely because the firmware compiles.
-
-The upstream project license, authors and attribution remain in the original project files. This variant has not been published or pushed to GitHub.
+Upstream attribution and the repository `LICENSE` are retained. BruceButBetter is associated with Yoursel71; Bruce firmware is maintained by BruceDevices. This is an unofficial, unpublished variant. Review the full [AGPL-3.0 license](LICENSE) before redistribution and preserve source/license obligations.

@@ -1,7 +1,13 @@
 # Contributing
 
-Please include the exact board, display controller, wiring, firmware environment, build log and runtime log. Report whether the observation was physically tested or only compiled.
+This repository is an unofficial hardware variant of BruceButBetter. Keep changes reproducible and preserve upstream attribution and the AGPL-3.0-or-later license.
 
-Keep hardware changes isolated from UI changes. Do not submit pinout changes without a schematic or clear photographs. For UI bugs, include rotation, `tft.width()`, `tft.height()`, logical UI dimensions and the menu path that reproduces the problem.
+Before opening a pull request:
 
-Preserve upstream Bruce attribution, licenses and third-party notices. Never include WiFi credentials, API keys, tokens, MAC-address logs or private local paths in issues or pull requests.
+- build `esp32-s3-n16r8-ili9341-touch` with the pinned PlatformIO configuration;
+- describe whether a result is code-verified or physically tested;
+- do not include Wi-Fi credentials, captured traffic, private logs, or local machine paths;
+- do not change GPIO, touch calibration, or SPI behavior without documenting the hardware impact;
+- include a short entry in `CHANGELOG.md` for user-visible changes.
+
+Hardware reports should include board revision, display/controller marking, wiring photo, and serial/runtime evidence. Security features must only be tested on systems and networks you own or are authorized to assess.
