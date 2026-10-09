@@ -4,6 +4,12 @@ This file records confirmed local changes; it is not a replacement for the upstr
 
 ## Unreleased
 
+- Removed the redundant pre-rotation full-screen clear immediately after `tft.init()` and added timestamped startup markers for regression timing. No hardware mapping or user-facing feature was changed.
+- Added an immediate Pablo frame after TFT initialization so storage/configuration loading does not leave the backlit panel blank.
+- Verified the early-frame path on COM18: first frame at 506 ms application time; normal storage and the 3200 ms splash timing remain intact.
+- Eliminated the second Pablo splash draw and the intermediate `begin_tft()` full-screen clear by reusing the early frame for the normal splash exposure. Build succeeded; flash awaits restoration of the ESP32-S3 COM port.
+- Completed flash after COM18 returned. Runtime verified one bitmap draw and one 3200 ms splash exposure with normal menu entry.
+
 - Added geometry/render diagnostics for main menu, submenu and first menu item rendering.
 - Added project-specific hardware, build and contribution documentation.
 - Replaced the three submenu-item `drawCentreString()` calls with explicit centered `drawString()` calls using measured text widths; added coordinate/color diagnostics. Awaiting physical confirmation.

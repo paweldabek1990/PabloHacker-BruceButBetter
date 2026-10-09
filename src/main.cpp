@@ -57,6 +57,8 @@ volatile int EncoderLedChange = 0;
 #endif
 
 TouchPoint touchPoint;
+static bool earlySplashShown = false;
+static uint32_t earlySplashStart = 0;
 
 // Temporary hardware diagnostic: bypass TFT_eSPI and drive the ILI9341 directly.
 #if defined(HAS_SCREEN) && defined(TFT_CS) && defined(TFT_DC) && defined(TFT_RST)
@@ -251,7 +253,7 @@ void setup_gpio() {
  **  Config tft
  *********************************************************************/
 void begin_tft() {
-    Serial.printf("BEGIN TFT ENTER rot=%d inv=%d\r\n", bruceConfigPins.rotation, bruceConfig.colorInverted);
+    Serial.printf("STARTUP %lu BEGIN_TFT_ENTER rot=%d inv=%d\r\n", millis(), bruceConfigPins.rotation, bruceConfig.colorInverted);
     tft.setRotation(bruceConfigPins.rotation); // sometimes it misses the first command
     // The saved config had colorInverted=1. On this ILI9341 that made the
     // normal Bruce background render as a blank white panel. Recover the
@@ -263,15 +265,26 @@ void begin_tft() {
     }
     tft.invertDisplay(false);
     tft.setRotation(bruceConfigPins.rotation);
+    Serial.printf("STARTUP %lu TFT_ROTATION_READY size=%dx%d\r\n", millis(), tft.width(), tft.height());
     tftWidth = tft.width();
 #ifdef HAS_TOUCH
     tftHeight = tft.height() - 45;
 #else
     tftHeight = tft.height();
 #endif
-    resetTftDisplay();
+    if (!earlySplashShown) {
+        resetTftDisplay();
+    } else {
+        // Keep the already visible first splash frame while storage/config
+        // loading finishes; only restore the text state needed by later UI.
+        tft.setCursor(0, 0);
+        tft.setTextSize(BRUCE_FONT_M);
+        tft.setTextColor(bruceConfig.priColor, bruceConfig.bgColor);
+        tft.setTextDatum(TL_DATUM);
+    }
+    Serial.printf("STARTUP %lu TFT_BACKGROUND_READY color=%04X\r\n", millis(), bruceConfig.bgColor);
     setBrightness(bruceConfig.bright, false);
-    Serial.printf("BEGIN TFT EXIT size=%dx%d logical=%dx%d\r\n", tft.width(), tft.height(), tftWidth, tftHeight);
+    Serial.printf("STARTUP %lu BEGIN_TFT_EXIT size=%dx%d logical=%dx%d\r\n", millis(), tft.width(), tft.height(), tftWidth, tftHeight);
 }
 
 /*********************************************************************
@@ -310,9 +323,6 @@ void boot_screen() {
  *********************************************************************/
 void boot_screen_anim() {
     Serial.println("BOOT SCREEN ENTER");
-    boot_screen();
-    const uint32_t splashStart = millis();
-    Serial.printf("STARTUP %lu SPLASH_EXPOSURE_BEGIN\r\n", splashStart);
     constexpr uint32_t SPLASH_DURATION_MS = 3200;
     // checks for boot.jpg in SD and LittleFS for customization
     int boot_img = 0;
@@ -324,6 +334,16 @@ void boot_screen_anim() {
     if (boot_img == 0 && LittleFS.exists("/boot.jpg")) boot_img = 2;
     else if (boot_img == 0 && LittleFS.exists("/boot.gif")) boot_img = 4;
     if (bruceConfig.theme.boot_img) boot_img = 5; // override others
+
+    uint32_t splashStart = millis();
+    if (boot_img == 0 && earlySplashShown) {
+        splashStart = earlySplashStart;
+        Serial.printf("STARTUP %lu SPLASH_REUSE_EARLY_FRAME\r\n", millis());
+        Serial.printf("STARTUP %lu SPLASH_EXPOSURE_BEGIN\r\n", splashStart);
+    } else {
+        boot_screen();
+        Serial.printf("STARTUP %lu SPLASH_EXPOSURE_BEGIN\r\n", splashStart);
+    }
 
     tft.drawPixel(0, 0, 0);       // Forces back communication with TFT, to avoid ghosting
                                   // Start image loop
@@ -379,6 +399,7 @@ void boot_screen_anim() {
     Serial.printf("STARTUP %lu SPLASH_EXPOSURE_END elapsed=%lu\r\n", millis(), millis() - splashStart);
     // Clear splashscreen
     tft.fillScreen(bruceConfig.bgColor);
+    Serial.printf("STARTUP %lu SPLASH_CLEAR_DONE color=%04X\r\n", millis(), bruceConfig.bgColor);
     Serial.println("BOOT SCREEN EXIT");
 }
 
@@ -506,9 +527,25 @@ void setup() {
     pinMode(NRF24_2_SS_PIN, OUTPUT); digitalWrite(NRF24_2_SS_PIN, HIGH);
 #endif
     esp_rom_printf(">>> BEFORE TFT INIT <<<\r\n");
+    Serial.printf("STARTUP %lu TFT_INIT_BEGIN\r\n", millis());
     tft.init();
+    Serial.printf("STARTUP %lu TFT_INIT_DONE\r\n", millis());
     esp_rom_printf(">>> AFTER TFT INIT <<<\r\n");
-    tft.fillScreen(TERMINAL_GREEN_BG);
+    // Draw the first frame before storage/configuration work.  BL is hardwired
+    // to 3V3, so keeping a valid frame on the panel avoids showing a blank
+    // controller surface while LittleFS/SD and the persisted config load.
+    tft.setRotation(bruceConfigPins.rotation);
+    tftWidth = tft.width();
+#ifdef HAS_TOUCH
+    tftHeight = tft.height() - 45;
+#else
+    tftHeight = tft.height();
+#endif
+    Serial.printf("STARTUP %lu EARLY_SPLASH_BEGIN size=%dx%d\r\n", millis(), tft.width(), tft.height());
+    boot_screen();
+    earlySplashStart = millis();
+    earlySplashShown = true;
+    Serial.printf("STARTUP %lu EARLY_SPLASH_DONE\r\n", millis());
 #else
     tft.begin();
 #endif
@@ -606,8 +643,9 @@ void loop() {
                   bruceConfig.bgColor, bruceConfig.priColor, bruceConfig.secColor,
                   tftWidth, tftHeight);
     tft.fillScreen(bruceConfig.bgColor);
-
+    Serial.printf("STARTUP %lu MENU_DRAW_BEGIN\r\n", millis());
     mainMenu.begin();
+    Serial.printf("STARTUP %lu MENU_DRAW_DONE\r\n", millis());
     Serial.println("MAIN LOOP MENU RETURN");
     delay(1);
 }

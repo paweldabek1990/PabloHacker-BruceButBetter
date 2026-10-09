@@ -29,4 +29,9 @@
 - Hardware documentation identifies inherited GPIO ambiguities: GPIO15/16 also occur in inherited button definitions, and the target overrides the inherited CC1101 CS default from GPIO10 to GPIO3.
 - Official Bruce App serial/mirroring compatibility with this fork is not physically verified. Native USB CDC is enabled and serial output works, but the app's live-mirror protocol has not been tested.
 - RGB565 byte-order fix has been flashed for physical verification; the PNG alone is not treated as proof of correct TFT colors.
+- Because TFT BL is hardwired to 3V3, a short white/blue flash before the ILI9341 accepts commands may remain a hardware limitation; firmware now avoids the additional post-init pre-rotation clear.
+- Early-splash latency experiment is pending physical confirmation; the later normal splash and menu path are intentionally preserved.
+- The ROM/bootloader/USB-enumeration time before the first application `millis()` marker is not measured. A brief pre-command flash may remain because BL is hardwired to 3V3, but the multi-second post-init blank storage interval is covered by the early splash.
+- Single-splash firmware build is ready, but COM18 disappeared before flashing and no serial ports are currently enumerated; physical/runtime confirmation is pending.
+- The single-splash firmware is now flashed and runtime-verified. Visual confirmation of the absence of residual hardware backlight flashes still requires observation on the physical TFT.
 - Runtime reaches the menu after the RGB565 fix without a crash; the actual logo color result still requires a physical screen check.

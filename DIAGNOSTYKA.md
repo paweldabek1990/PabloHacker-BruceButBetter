@@ -896,3 +896,63 @@ Reference RGB565 diagnostic values: red `0xF800`, green `0x07E0`, blue `0x001F`,
 - Flash: SUCCESS on confirmed ESP32-S3 COM18; esptool reported `Hash of data verified`; no NVS erase.
 - Runtime: `SPLASH_EXPOSURE_END elapsed=3201`, `BOOT SCREEN EXIT`, and `MAIN LOOP MENU ENTER`; no crash observed.
 - Preview PNG was regenerated/checked from the same logical RGB565 asset and coordinates; it is not evidence of physical TFT color correctness. Physical confirmation is still required.
+
+## Startup transition cleanup — 2026-10-09
+
+- Backup: `backups/20261009-031335-before-boot-regression`.
+- Static audit found a full-screen `tft.fillScreen(TERMINAL_GREEN_BG)` immediately after `tft.init()` and before `begin_tft()` applied the final rotation/configuration. This was redundant because `resetTftDisplay()` and `boot_screen()` clear the panel later with the persisted Terminal Green background.
+- Removed only that premature clear. GPIO, SPI, touch, bitmap byte swapping, menu geometry and splash duration were not changed.
+- Kept the two existing `setRotation()` calls in `begin_tft()` because the source explicitly documents the second call as protection for this panel.
+- Added timestamped markers for TFT init, rotation, background readiness, splash clear and `begin_tft()` completion. Build/flash/runtime results are pending.
+- Hardware limitation: BL is hardwired to 3V3, so a brief pre-command backlight flash during controller reset/init cannot be guaranteed removable in firmware. The post-init redundant clear is removable and is the controlled change here.
+
+### Controlled startup cleanup result — 2026-10-09
+
+- Build: SUCCESS; RAM `125708/327680 (38.4%)`; Flash `3627183/4653056 (78.0%)`.
+- Merged BIN: `Bruce-esp32-s3-n16r8-ili9341-touch.bin`, 3,693,264 bytes.
+- BIN SHA-256: `9A7632622752BC32C85B2B0EFBE999068782BDDBC3CEEB8679EF9C8627164E55`.
+- ELF SHA-256: `2738997BB65843DECE98F80081B97068F31646BBAB1017076CE8B0966C542B2D`.
+- Flash: SUCCESS on confirmed ESP32-S3 COM18, MAC `e0:72:a1:db:b1:70`; esptool reported `Hash of data verified`; no erase/NVS erase.
+- Runtime: reached `SPLASH_EXPOSURE_END elapsed=3201`, `SPLASH_CLEAR_DONE color=0841`, `BOOT SCREEN EXIT`, `SETUP EXIT BEFORE LOOP` and `MAIN LOOP MENU ENTER bg=0841 pri=3FE2 sec=B7F3 size=240x275`; no Guru Meditation/panic appeared in the captured log.
+- The capture contains repeated `CUSTOM_BOOT_IMAGE_DRAWN type=0` lines from an existing diagnostic logging-brace issue. This is log noise; it does not indicate repeated bitmap drawing because `boot_img=0` and `drawn` becomes true.
+- Logs: `logs/20261009-031335-before-boot-regression/build.log`, `flash.log`, and `runtime.log`.
+
+## Early splash latency experiment — 2026-10-09
+
+- Static analysis found that `tft.init()` completed before `begin_storage()`, but the first Pablo frame was not drawn until after `LittleFS.begin(true)`, SD setup and persisted configuration loading. Those operations occurred while the backlight was already on.
+- Added an early frame immediately after `tft.init()` using the existing `boot_screen()` renderer and default target rotation/dimensions. Normal storage/configuration, `begin_tft()` and the existing timed splash remain unchanged afterward.
+- This is intended to cover the storage wait with a valid dark Pablo frame, not to change the TFT protocol or hardware reset timings.
+- New runtime markers: `EARLY_SPLASH_BEGIN` and `EARLY_SPLASH_DONE`.
+
+### Early splash latency result — 2026-10-09
+
+- Backup: `backups/20261009-032151-before-boot-latency`.
+- Runtime on confirmed ESP32-S3 COM18: `TFT_INIT_BEGIN` at 26 ms, `TFT_INIT_DONE` at 323 ms, `EARLY_SPLASH_BEGIN` at 324 ms and `EARLY_SPLASH_DONE` at 506 ms.
+- The first Pablo frame therefore became available about 506 ms after the application log start. The physical-reset-to-application-start portion (ROM/bootloader/USB enumeration) is not measured by `millis()` and remains unknown.
+- `BEGIN_TFT_ENTER` occurred at 3051 ms because storage/configuration loading ran while the early splash was already visible. It completed at 3186 ms; the normal timed splash then ran for 3200 ms and the menu was reached at 6713 ms.
+- Before this change, the first frame was only drawn after storage/configuration, so the approximately 2.5 s storage interval was exposed as a blank backlit panel. This is the confirmed software cause of the long blank phase.
+- Build: SUCCESS; RAM `125708/327680 (38.4%)`; Flash `3627335/4653056 (78.0%)`.
+- BIN: `Bruce-esp32-s3-n16r8-ili9341-touch.bin`, 3,693,408 bytes; SHA-256 `9624504809DE946A6A892A4951B7C5ED2A65296D77D9FD565426CC813D8C8B96`.
+- ELF SHA-256: `928072A13A4A64816A5CB0B265D145BC5D7AF91B26017B79FED5A7039CFE3120`.
+- Flash: SUCCESS, `Hash of data verified`, COM18, MAC `e0:72:a1:db:b1:70`; no erase/NVS erase.
+- Runtime regression: no panic/crash; normal splash, Terminal Green colors and main menu path reached. Physical touch/menu appearance still requires user confirmation.
+
+## Single-splash experiment — 2026-10-09
+
+- Confirmed source path before change: `setup()` called `boot_screen()` for the early frame, then `boot_screen_anim()` called `boot_screen()` again. `begin_tft()` also called `resetTftDisplay()`, producing a full-screen clear between the two paths.
+- Changed only `src/main.cpp`: `boot_screen_anim()` now reuses the early frame and its exposure start when no external boot image is selected; `begin_tft()` preserves that frame instead of clearing it. The final splash clear before the menu remains. Added `MENU_DRAW_BEGIN/DONE` markers.
+- Backup: `backups/20261009-033000-before-single-splash`.
+- Build: SUCCESS; RAM `125716/327680 (38.4%)`; Flash `3627639/4653056 (78.0%)`.
+- BIN: `Bruce-esp32-s3-n16r8-ili9341-touch.bin`, 3,693,712 bytes; SHA-256 `7DFD47110A0295EC4C2B39FC10A42BC354B52AB31C40D91E897E4F4D963CF868`.
+- ELF SHA-256: `A6E0A2B7631D7465316A0A5EC415112D1FF6892CB9E003843570420465293264`.
+- Flash: NOT EXECUTED; first attempt failed before opening the port because COM18 disappeared/became unavailable. No write or erase occurred. Current serial-port enumeration returned no COM ports.
+- Runtime: NOT AVAILABLE for this build because the device port is currently absent. Physical verification is pending.
+
+### Single-splash completion — 2026-10-09
+
+- COM18 returned and was identified as the same ESP32-S3, MAC `e0:72:a1:db:b1:70`.
+- Flash retry: SUCCESS; `Hash of data verified`; no erase/NVS erase.
+- Runtime confirmed exactly one `BOOT_DRAW_BEGIN` and one `BOOT_DRAW_DONE` in the fresh reset capture.
+- Runtime: `EARLY_SPLASH_DONE` at 506 ms, `SPLASH_REUSE_EARLY_FRAME`, `SPLASH_EXPOSURE_END elapsed=3200`, `SPLASH_CLEAR_DONE`, `MAIN LOOP MENU ENTER`, and `MENU_DRAW_BEGIN`; no panic/backtrace observed.
+- `BEGIN_TFT_EXIT` no longer produces an intermediate full-screen clear while the early splash is active.
+- Runtime log: `logs/20261009-033000-single-splash/runtime.log`; flash retry log: `logs/20261009-033000-single-splash/flash-retry.log`.

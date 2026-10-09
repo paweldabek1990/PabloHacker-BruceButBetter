@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+  <rect width="900" height="520" fill="#111"/>
+  <g font-family="Arial" fill="#e7ffe0">
+    <text x="30" y="35" font-size="24">Rugged A — measured-layout placeholder</text>
+    <text x="30" y="62" font-size="14" fill="#ffcc66">MEASURE_REQUIRED: not a final manufacturing drawing</text>
+    <rect x="60" y="110" width="240" height="330" rx="25" fill="#222" stroke="#39ff14" stroke-width="3"/>
+    <rect x="92" y="155" width="176" height="235" fill="#050805" stroke="#b7ff9a" stroke-width="2"/>
+    <text x="105" y="275" font-size="16">ILI9341 240×320</text>
+    <rect x="355" y="150" width="210" height="105" rx="8" fill="#333" stroke="#b7ff9a"/>
+    <text x="385" y="205" font-size="18">ESP32-S3</text>
+    <text x="385" y="228" font-size="13">USB-C ×2 — offsets TBD</text>
+    <rect x="355" y="290" width="210" height="90" rx="12" fill="#292929" stroke="#b7ff9a"/>
+    <text x="405" y="340" font-size="18">18650 holder</text>
+    <rect x="665" y="160" width="70" height="270" rx="20" fill="#292929" stroke="#39ff14"/>
+    <text x="678" y="300" font-size="16" transform="rotate(90 678 300)">removable stylus cradle</text>
+    <text x="600" y="80" font-size="16">A1: no buttons</text>
+    <text x="600" y="105" font-size="16">A2: two optional provisions</text>
+  </g>
+</svg>
