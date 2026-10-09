@@ -22,6 +22,8 @@ All values marked `MEASURE_REQUIRED` in the SCAD file are placeholders. Do not p
 
 No STL is committed because OpenSCAD is not installed in the current environment and an STL generated from unverified dimensions would be misleading. After measurements are entered, export A1 and A2 from OpenSCAD and record the slicer settings.
 
+The only populated mechanical reference is the published YD-ESP32-S3 envelope 57.15 × 27.94 mm and 2.54 mm header pitch from [ESPboards.dev](https://www.espboards.dev/esp32/yd-esp32-s3/). Verify it against the user's board before relying on it.
+
 ## Material and print assumptions
 
 PETG is the baseline; ASA is preferred for heat/UV resistance. Suggested starting values are 0.20 mm layer height, 4 perimeter walls, 25–35% infill and 5 mm corner radii, but these are print recommendations, not verified mechanical requirements.

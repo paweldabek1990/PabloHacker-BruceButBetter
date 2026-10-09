@@ -14,8 +14,11 @@ tft_hole_d = 3.2;      // MEASURE_REQUIRED: mounting hole diameter
 tft_hole_x = 5.0;      // MEASURE_REQUIRED: hole center inset
 tft_hole_y = 5.0;      // MEASURE_REQUIRED: hole center inset
 
-esp_w = 55.0;          // MEASURE_REQUIRED: carrier width
-esp_h = 28.0;          // MEASURE_REQUIRED: carrier length
+// Reference envelope from espboards.dev; verify against the user's V1.4 board
+// before final export. Source: https://www.espboards.dev/esp32/yd-esp32-s3/
+esp_w = 57.15;         // VERIFIED REFERENCE: board long dimension (mm)
+esp_h = 27.94;         // VERIFIED REFERENCE: board short dimension (mm)
+esp_pitch = 2.54;      // VERIFIED REFERENCE: header pitch (mm)
 esp_t = 12.0;          // MEASURE_REQUIRED: tallest component
 usb_x = 8.0;           // MEASURE_REQUIRED: USB-C center offset
 usb_z = 8.0;           // MEASURE_REQUIRED: USB-C height

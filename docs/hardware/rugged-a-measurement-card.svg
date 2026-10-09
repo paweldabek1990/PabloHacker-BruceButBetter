@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700">
+  <rect width="1000" height="700" fill="#111"/>
+  <g font-family="Arial" fill="#eaffdf">
+    <text x="30" y="35" font-size="26">Rugged A1 — karta pomiarowa</text>
+    <text x="30" y="65" font-size="15" fill="#ffcc66">Nie używaj zdjęcia jako skali. Zmierz suwmiarką i wpisz mm do SCAD.</text>
+    <rect x="90" y="130" width="300" height="430" fill="#222" stroke="#39ff14" stroke-width="3"/>
+    <rect x="135" y="190" width="210" height="300" fill="#050805" stroke="#b7ff9a" stroke-width="2"/>
+    <text x="120" y="110" font-size="16">TPM408 PCB: W/H/T</text>
+    <text x="420" y="155" font-size="16">A — obrys PCB</text>
+    <text x="420" y="180" font-size="16">B — 4× średnica otworu</text>
+    <text x="420" y="205" font-size="16">C — rozstaw X/Y otworów</text>
+    <text x="420" y="230" font-size="16">D — offset aktywnego okna</text>
+    <line x1="390" y1="145" x2="345" y2="145" stroke="#39ff14" stroke-width="2"/>
+    <line x1="390" y1="195" x2="330" y2="195" stroke="#39ff14" stroke-width="2"/>
+    <line x1="390" y1="245" x2="345" y2="245" stroke="#39ff14" stroke-width="2"/>
+    <rect x="90" y="600" width="300" height="55" fill="#222" stroke="#b7ff9a"/>
+    <text x="105" y="632" font-size="15">E — złącze pinów: szerokość,</text>
+    <text x="105" y="650" font-size="15">wysokość headera i zapas przewodów</text>
+    <rect x="650" y="350" width="230" height="112" rx="8" fill="#333" stroke="#b7ff9a" stroke-width="2"/>
+    <text x="680" y="395" font-size="19">ESP32-S3</text>
+    <text x="680" y="420" font-size="14">57.15 × 27.94 mm</text>
+    <text x="680" y="442" font-size="14">reference — verify</text>
+    <text x="585" y="315" font-size="16">F — oba USB-C:</text>
+    <text x="585" y="338" font-size="16">środki X/Y, szerokość,</text>
+    <text x="585" y="361" font-size="16">wysokość i głębokość wtyku</text>
+    <line x1="650" y1="365" x2="625" y2="390" stroke="#39ff14" stroke-width="2"/>
+    <rect x="650" y="500" width="230" height="70" rx="20" fill="#292929" stroke="#b7ff9a"/>
+    <text x="682" y="530" font-size="16">18650 holder</text>
+    <text x="682" y="552" font-size="14">W/L/H + cable exit</text>
+    <text x="30" y="685" font-size="14" fill="#ffcc66">G — rysik: długość, średnica, położenie uchwytu i wymagany luz wyjmowania</text>
+  </g>
+</svg>
