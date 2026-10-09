@@ -67,6 +67,7 @@ JsonDocument BruceConfig::toJson() const {
     setting["wdgwarsApiKey"] = wdgwarsApiKey;
     setting["devMode"] = devMode;
     setting["colorInverted"] = colorInverted;
+    setting["uiColorPreset"] = uiColorPreset;
 
     setting["badUSBBLEKeyboardLayout"] = badUSBBLEKeyboardLayout;
     setting["badUSBBLEKeyDelay"] = badUSBBLEKeyDelay;
@@ -150,6 +151,20 @@ void BruceConfig::fromFile(bool checkFS) {
     } else {
         count++;
         log_e("Fail");
+    }
+
+    if (!setting["uiColorPreset"].isNull()) {
+        uiColorPreset = setting["uiColorPreset"].as<String>();
+    }
+
+    bool migratedTerminalGreen = false;
+    if (themePath.isEmpty() && uiColorPreset.isEmpty()) {
+        priColor = TERMINAL_GREEN_PRI;
+        secColor = TERMINAL_GREEN_SEC;
+        bgColor = TERMINAL_GREEN_BG;
+        uiColorPreset = "Terminal Green";
+        migratedTerminalGreen = true;
+        Serial.printf("TERMINAL GREEN MIGRATION pri=%04X sec=%04X bg=%04X\r\n", priColor, secColor, bgColor);
     }
 
     if (!setting["dimmerSet"].isNull()) {
@@ -430,7 +445,7 @@ void BruceConfig::fromFile(bool checkFS) {
     }
 
     validateConfig();
-    if (count > 0) saveFile();
+    if (count > 0 || migratedTerminalGreen) saveFile();
 
     // Load MIFARE keys (loading via manager)
     MifareKeysManager::ensureLoaded(mifareKeys);

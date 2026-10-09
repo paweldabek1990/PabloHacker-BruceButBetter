@@ -39,6 +39,7 @@ void BleMenu::optionsMenu() {
     options.push_back({"BLE Keyboard", [=]() { ducky_keyboard(hid_ble, true); }});
 #endif
     options.push_back({"BLE Spam", [=]() { spamMenu(); }});
+    options.push_back({"BLE Test Beacon", [=]() { bleDiagnosticsBeacon(); }});
     options.push_back({"Jammer (Hizli)", nrf_jam_ble_fast});
     options.push_back({"Jammer (Agir)", nrf_jam_ble_heavy});
 

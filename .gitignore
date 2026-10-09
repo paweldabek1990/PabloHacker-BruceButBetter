@@ -23,3 +23,15 @@ verbose-build.txt
 build-*.log
 flash-*.log
 runtime-*.log
+# Local diagnostic/build material; do not publish
+src_BACKUP/
+tools/OpenSCAD-2021.01*/
+tools/OpenSCAD-2021.01-x86-64.zip
+pio-config.txt
+include/current_year.h
+include/webFiles.h
+src/idf_component.yml.orig
+embedded_resources/web_interface/checksum.sha256
+flash-logs/
+hardware/case/generated/*.log
+Bruce-*.bin

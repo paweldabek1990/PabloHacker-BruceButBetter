@@ -104,6 +104,52 @@ int android_models_count = (sizeof(android_models) / sizeof(android_models[0]));
 
 BLEAdvertising *pAdvertising;
 
+// Safe diagnostic path: one ordinary, identifiable advertisement only.
+// This intentionally does not use any spoofing payload or random MAC.
+void bleDiagnosticsBeacon() {
+    drawMainBorderWithTitle("BLE Test Beacon");
+    padprintln("BRUCE-BLE-TEST");
+    padprintln("Scan for 60 seconds");
+    padprintln("Press any key to stop");
+
+    Serial.println("[BLE-DIAG] init begin name=BRUCE-BLE-TEST");
+    const bool initOk = BLEDevice::init("BRUCE-BLE-TEST");
+    Serial.printf("[BLE-DIAG] init=%s\r\n", initOk ? "ok" : "FAIL");
+    if (!initOk) return;
+
+    BLEAdvertising *advertising = BLEDevice::getAdvertising();
+    Serial.printf("[BLE-DIAG] advertising=%s\r\n", advertising ? "ok" : "NULL");
+    if (!advertising) {
+        BLEDevice::deinit();
+        return;
+    }
+
+    BLEAdvertisementData data;
+    data.setFlags(0x06);
+    const bool nameOk = data.setName("BRUCE-BLE-TEST");
+    const bool dataOk = advertising->setAdvertisementData(data);
+    const bool scanOk = advertising->setScanResponseData(BLEAdvertisementData());
+    advertising->setMinInterval(160); // 100 ms
+    advertising->setMaxInterval(320); // 200 ms
+    Serial.printf("[BLE-DIAG] name=%s data=%s scan=%s interval=100..200ms\r\n",
+                  nameOk ? "ok" : "FAIL", dataOk ? "ok" : "FAIL", scanOk ? "ok" : "FAIL");
+
+    const bool startOk = advertising->start();
+    Serial.printf("[BLE-DIAG] start=%s active=%s\r\n", startOk ? "ok" : "FAIL",
+                  advertising->isAdvertising() ? "yes" : "no");
+    const uint32_t startedAt = millis();
+    while (!check(AnyKeyPress) && millis() - startedAt < 60000UL) {
+        delay(250);
+    }
+
+    const bool stopOk = advertising->stop();
+    Serial.printf("[BLE-DIAG] stop=%s active=%s elapsed_ms=%lu\r\n", stopOk ? "ok" : "FAIL",
+                  advertising->isAdvertising() ? "yes" : "no", millis() - startedAt);
+    const bool deinitOk = BLEDevice::deinit();
+    Serial.printf("[BLE-DIAG] deinit=%s\r\n", deinitOk ? "ok" : "FAIL");
+    returnToMenu = true;
+}
+
 BLEAdvertisementData GetUniversalAdvertisementData(EBLEPayloadType Type, String customName = "") {
     BLEAdvertisementData AdvData = BLEAdvertisementData();
     uint8_t *AdvData_Raw = nullptr;

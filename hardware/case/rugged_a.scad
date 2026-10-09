@@ -49,20 +49,20 @@ case_h = max(tft_h, batt_l) + 2*wall + 8;
 
 module_t = tft_t + clearance;
 
-module_holes() {
+module module_holes() {
     for (x=[tft_hole_x, tft_w-tft_hole_x])
         for (y=[tft_hole_y, tft_hole_y+tft_hole_spacing_y])
             translate([x,y,-1]) cylinder(d=tft_hole_d+0.5,h=depth+2,$fn=32);
 }
 
-rounded_box(w,h,d,r) {
+module rounded_box(w,h,d,r) {
     hull() {
         for (x=[r,w-r]) for (y=[r,h-r])
             translate([x,y,0]) cylinder(r=r,h=d,$fn=32);
     }
 }
 
-front_shell() {
+module front_shell() {
     difference() {
         rounded_box(case_w, case_h, depth, corner_r);
         // TFT opening: placeholder position until active-window offsets are measured.
@@ -84,7 +84,7 @@ front_shell() {
     }
 }
 
-back_cover() {
+module back_cover() {
     difference() {
         rounded_box(case_w, case_h, 4, corner_r);
         // Ventilation and cable relief are intentionally conservative placeholders.
@@ -92,7 +92,7 @@ back_cover() {
     }
 }
 
-stylus_holder() {
+module stylus_holder() {
     difference() {
         // Thick cradle for a tapered stylus, with a flexible-looking retaining
         // clip geometry. Dimensions are estimates until the real stylus is measured.
@@ -108,7 +108,7 @@ stylus_holder() {
     translate([case_w+4, 12+stylus_l-8, stylus_d+10]) cube([stylus_d+6, 8, 2]);
 }
 
-button_provisions() {
+module button_provisions() {
     if (variant == "A2") {
         // Mechanical provisions only. GPIO assignment is intentionally absent.
         for (y=[case_h/2-10, case_h/2+10])

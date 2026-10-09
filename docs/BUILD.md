@@ -1,7 +1,11 @@
-# Build your own — DIY Flipper Zero (ESP32-S3)
+# Build BruceButBetter — ESP32-S3 DIY Touch
 
-A hand-built, Flipper-Zero-class multitool on an **ESP32-S3 N16R8**, running [BruceButBetter](../README.md).
+A hand-built multitool on an **ESP32-S3 N16R8**, running [BruceButBetter](../README.md).
 Sub-GHz, NFC/RFID, 2.4 GHz, IR, WiFi/BLE and a signal generator — on a protoboard, for around **$40**.
+
+> This file is a general assembly reference. The authoritative pinout and the tested display target
+> are documented in [docs/hardware/README.md](hardware/README.md). Do not use the legacy OLED or
+> browser-flasher instructions that may remain in historical sections below.
 
 > One firmware, mixed hardware. Every module is probed at runtime — populate only the chips you
 > want; a missing one just shows "not found" and the rest still works. Start with the ESP32-S3 +
@@ -17,7 +21,7 @@ Sub-GHz, NFC/RFID, 2.4 GHz, IR, WiFi/BLE and a signal generator — on a protobo
 
 | Tier | Parts | Approx. cost |
 |---|---|---|
-| **Minimum** (usable UI) | ESP32-S3 + OLED + buttons + buzzer | **~$13** |
+| **Minimum** (usable UI) | ESP32-S3 + ILI9341/XPT2046 + buttons + buzzer | **~$18** |
 | **Recommended** (Sub-GHz + NFC + IR) | + CC1101 + PN532 + IR rx/tx + microSD | **~$25** |
 | **Full** (everything) | + 2× NRF24 + Si5351 + battery | **~$40** |
 
@@ -30,7 +34,7 @@ Prices are rough AliExpress figures (2026); swap for Amazon/local if you want th
 | # | Part | Spec / notes | ~$ | Where |
 |--:|------|--------------|---:|-------|
 | 1 | **ESP32-S3 DevKitC-1** | **N16R8** (16 MB flash, 8 MB PSRAM), dual USB-C | 7.00 | [search](https://www.aliexpress.com/wholesale?SearchText=ESP32-S3+DevKitC-1+N16R8) |
-| 2 | OLED 1.3" | **SH1106** driver (a.k.a. SSD1106G), I²C, 128×64 | 3.50 | [search](https://www.aliexpress.com/wholesale?SearchText=1.3+inch+OLED+SH1106+I2C) |
+| 2 | TFT 2.8" | **ILI9341**, SPI, 240×320 + XPT2046 touch | 6.00 | local/module-dependent |
 | 3 | CC1101 module | Sub-GHz 300–928 MHz, SPI | 2.50 | [search](https://www.aliexpress.com/wholesale?SearchText=CC1101+module+868) |
 | 4 | PN532 module | NFC 13.56 MHz, set to **I²C** mode | 4.00 | [search](https://www.aliexpress.com/wholesale?SearchText=PN532+NFC+module) |
 | 5 | NRF24L01+ ×2 | 2.4 GHz; PA/LNA versions reach further | 3.00 | [search](https://www.aliexpress.com/wholesale?SearchText=NRF24L01+module) |
