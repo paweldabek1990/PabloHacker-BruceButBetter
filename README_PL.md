@@ -26,5 +26,8 @@ Konfiguracja używa pioarduino / Arduino-ESP32 3.3.6. Przed flashowaniem zawsze 
 - [docs/hardware/rugged-a.md](docs/hardware/rugged-a.md) — obudowa Rugged A1
 - [DIAGNOSTYKA.md](DIAGNOSTYKA.md) — dziennik techniczny
 - [KNOWN_ISSUES.md](KNOWN_ISSUES.md) — znane ograniczenia
+- [docs/hardware/AS_BUILT/VERIFICATION_REPORT.md](docs/hardware/AS_BUILT/VERIFICATION_REPORT.md) — ostrożna dokumentacja ze zdjęć rzeczywistego zestawu
+
+Zdjęcia potwierdzają obecność trzech płytek stykowych i modułów, ale nie pozwalają jeszcze jednoznacznie odtworzyć każdego przewodu, rzędu ani mostka zasilania. Nie rozłączaj działającego zestawu wyłącznie na podstawie roboczej dokumentacji AS_BUILT.
 
 Projekt jest przeznaczony wyłącznie do autoryzowanych testów, edukacji i pracy na własnym sprzęcie/sieci.

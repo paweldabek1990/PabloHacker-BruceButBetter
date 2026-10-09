@@ -29,6 +29,8 @@ The target `esp32-s3-n16r8-ili9341-touch` builds, boots into the full menu, uses
 
 See [HARDWARE_WIRING.md](HARDWARE_WIRING.md), [pinout](docs/hardware/pinout.md), [SVG](docs/hardware/wiring.svg), and [reassembly checklist](docs/hardware/reassembly-checklist.md). GPIO15/16 also occur in inherited button definitions; CC1101 CS is overridden to GPIO3 for this target.
 
+The newly supplied photographs are documented in [AS_BUILT](docs/hardware/AS_BUILT/VERIFICATION_REPORT.md). They confirm the three-board assembly, but do **not** yet prove every wire endpoint or breadboard row. Do not disassemble the working setup using the AS_BUILT draft as a complete reconstruction map.
+
 ## Features and evidence
 
 The source contains Wi-Fi, BLE, USB/HID, Sub-GHz/CC1101, NRF24, PN532/RFID, IR, Si5351, filesystem, Ethernet, GPS, LoRa, and other Bruce modules. Compilation proves inclusion, not physical operation. Physically exercised: display, touch, full menu navigation, Wi-Fi scan/navigation, Terminal Green, and splash timing. RF, NFC/RFID, IR, SD, optional radios, and Bruce App mirroring remain unverified.
@@ -53,7 +55,7 @@ The audit of the local checkout, commits, tests, and publication hygiene is in [
 
 ## Actions and roadmap
 
-`.github/workflows/platformio.yml` builds the real target and uploads artifacts; it has not been run on GitHub and never flashes hardware. Roadmap: confirm bitmap colors physically, test SD/peripherals, test Bruce App compatibility, resolve inherited GPIO ambiguities, then prepare a private GitHub repository.
+`.github/workflows/platformio.yml` builds the real target and uploads artifacts; it never flashes hardware. Roadmap: complete row-level AS_BUILT verification, test SD/peripherals, test Bruce App compatibility, resolve inherited GPIO ambiguities, then publish a reviewed public repository.
 
 ## Provenance and license
 
