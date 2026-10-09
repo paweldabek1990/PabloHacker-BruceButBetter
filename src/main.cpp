@@ -286,7 +286,13 @@ void boot_screen() {
     const int logoY = 16;
     Serial.printf("STARTUP %lu BOOT_DRAW_BEGIN\r\n", millis());
     tft.fillScreen(bruceConfig.bgColor);
+    // The asset stores standard RGB565 words. ESP32 memory is little-endian,
+    // while ILI9341 expects each pixel MSB first on SPI. Swap only this
+    // bitmap transfer; text/menu rendering must retain its existing state.
+    const bool previousSwapBytes = tft.getSwapBytes();
+    tft.setSwapBytes(true);
     tft.pushImage(logoX, logoY, PABLO_LOGO_WIDTH, PABLO_LOGO_HEIGHT, pablo_logo_rgb565);
+    tft.setSwapBytes(previousSwapBytes);
     tft.setTextColor(green, bruceConfig.bgColor);
     tft.setTextDatum(MC_DATUM);
     tft.setTextSize(BRUCE_FONT_M);

@@ -879,3 +879,20 @@ Added the reproducible wiring table and diagrams in `HARDWARE_WIRING.md`, `docs/
 - Logs: latest dated directory under `logs/` contains `build.log`, `flash.log`, `flash-retry.log`, and `runtime.log`. The first flash attempt failed before writing due to Windows CP1252 encoding in esptool; the UTF-8 retry succeeded.
 
 Visual appearance on the physical TFT remains pending user confirmation.
+
+## RGB565 correction — pending physical confirmation
+
+The first bitmap build used standard RGB565 words with TFT_eSPI's default `_swapBytes=false`. On ESP32-S3 this sends the two bytes in little-endian memory order, while the ILI9341 SPI pixel stream is MSB-first; the observed pink/purple/blue image is consistent with this mismatch. Text and menu colors remained correct because they use the normal TFT_eSPI color-write path. `boot_screen()` now saves the current swap state, enables `setSwapBytes(true)` only around the PROGMEM `pushImage()` call, then restores the previous state. No global color or BGR setting was changed.
+
+Reference RGB565 diagnostic values: red `0xF800`, green `0x07E0`, blue `0x001F`, white `0xFFFF`, black `0x0000`. The ILI9341 driver is configured with its existing target rotation/color-order settings; no controller register changes were made.
+
+### Controlled RGB565 fix result — 2026-10-09
+
+- Changed only `src/main.cpp::boot_screen()`: save `tft.getSwapBytes()`, call `tft.setSwapBytes(true)` for the PROGMEM bitmap `pushImage()`, then restore the saved state.
+- No change to Terminal Green, TFT driver, BGR/RGB controller mode, GPIO, touch, fonts, or menu geometry.
+- Build: SUCCESS, environment `esp32-s3-n16r8-ili9341-touch`; RAM 38.4%, Flash 77.9%.
+- BIN SHA-256: `6039F3000167F452E15B9DAA6BFFD5D06D59F0D16B4C57A7E0A83AF06BA9020D`; size 3,692,896 bytes.
+- ELF SHA-256: `738B6C462F077368B85F40850C40916F12184E2A4556A3907D29FD82C7AEF2E2`.
+- Flash: SUCCESS on confirmed ESP32-S3 COM18; esptool reported `Hash of data verified`; no NVS erase.
+- Runtime: `SPLASH_EXPOSURE_END elapsed=3201`, `BOOT SCREEN EXIT`, and `MAIN LOOP MENU ENTER`; no crash observed.
+- Preview PNG was regenerated/checked from the same logical RGB565 asset and coordinates; it is not evidence of physical TFT color correctness. Physical confirmation is still required.

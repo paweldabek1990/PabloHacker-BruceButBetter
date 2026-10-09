@@ -40,3 +40,5 @@ LCD color/text drawing and basic XPT2046 response are physically verified. Full 
 - Replaced the procedural Pablo splash emblem with a 160x155 RGB565 hooded cyber-hacker bitmap: green eyes, large `P`, and circuit details.
 - Added an exact 240x320 splash preview tied to the firmware asset and splash coordinates.
 - Built and flashed the `esp32-s3-n16r8-ili9341-touch` target successfully on the confirmed ESP32-S3 COM18. Physical visual confirmation of the new logo is still pending.
+- Corrected the Pablo RGB565 bitmap transfer by enabling byte swapping only for its `pushImage()` call; Terminal Green rendering is unaffected.
+- Flashed and runtime-checked the RGB565 byte-order correction on ESP32-S3 COM18; physical color confirmation remains pending.

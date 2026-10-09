@@ -28,3 +28,5 @@
 - `runtime.log` contains repeated `CUSTOM_BOOT_IMAGE_DRAWN type=0` diagnostic lines during splash exposure from an earlier diagnostic path; this is log noise, not a confirmed display failure.
 - Hardware documentation identifies inherited GPIO ambiguities: GPIO15/16 also occur in inherited button definitions, and the target overrides the inherited CC1101 CS default from GPIO10 to GPIO3.
 - Official Bruce App serial/mirroring compatibility with this fork is not physically verified. Native USB CDC is enabled and serial output works, but the app's live-mirror protocol has not been tested.
+- RGB565 byte-order fix has been flashed for physical verification; the PNG alone is not treated as proof of correct TFT colors.
+- Runtime reaches the menu after the RGB565 fix without a crash; the actual logo color result still requires a physical screen check.
