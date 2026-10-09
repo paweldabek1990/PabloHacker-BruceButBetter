@@ -34,4 +34,5 @@ src/idf_component.yml.orig
 embedded_resources/web_interface/checksum.sha256
 flash-logs/
 hardware/case/generated/*.log
+hardware/case/generated/
 Bruce-*.bin
