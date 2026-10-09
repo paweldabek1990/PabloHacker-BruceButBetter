@@ -1,4 +1,5 @@
 #include "core/main_menu.h"
+#include "assets/pablo_logo.h"
 #include <globals.h>
 #ifdef HAS_SI5351
 #include "core/boot_logo.h"
@@ -278,21 +279,23 @@ void begin_tft() {
  **  Draw boot screen
  *********************************************************************/
 void boot_screen() {
-#if defined(HAS_SI5351)
+    // Pablo Hacker: embedded RGB565 artwork generated for the 240x320 panel.
+    const uint16_t green = bruceConfig.priColor;
+    const int cx = tftWidth / 2;
+    const int logoX = (tftWidth - PABLO_LOGO_WIDTH) / 2;
+    const int logoY = 16;
+    Serial.printf("STARTUP %lu BOOT_DRAW_BEGIN\r\n", millis());
     tft.fillScreen(bruceConfig.bgColor);
-    tft.drawBitmap(0, 0, boot_logo, 128, 64, bruceConfig.priColor, bruceConfig.bgColor);
-#else
-    tft.setTextColor(bruceConfig.priColor, bruceConfig.bgColor);
+    tft.pushImage(logoX, logoY, PABLO_LOGO_WIDTH, PABLO_LOGO_HEIGHT, pablo_logo_rgb565);
+    tft.setTextColor(green, bruceConfig.bgColor);
+    tft.setTextDatum(MC_DATUM);
     tft.setTextSize(BRUCE_FONT_M);
-    tft.drawPixel(0, 0, bruceConfig.bgColor);
-    tft.drawCentreString("Bruce", tftWidth / 2, 10, 1);
+    tft.drawString("PABLO HACKER", cx, 186, 1);
     tft.setTextSize(BRUCE_FONT_P);
-    tft.drawCentreString(BRUCE_VERSION, tftWidth / 2, 25, 1);
-    tft.setTextSize(BRUCE_FONT_M);
-    tft.drawCentreString(
-        "PREDATORY FIRMWARE", tftWidth / 2, tftHeight + 2, 1
-    ); // will draw outside the screen on non touch devices
-#endif
+    tft.setTextColor(bruceConfig.secColor, bruceConfig.bgColor);
+    tft.drawString("PABLO SIGNAL", cx, 210, 1);
+    tft.setTextDatum(TL_DATUM);
+    Serial.printf("STARTUP %lu BOOT_DRAW_DONE logo=86x86\r\n", millis());
 }
 
 /*********************************************************************
@@ -302,7 +305,9 @@ void boot_screen() {
 void boot_screen_anim() {
     Serial.println("BOOT SCREEN ENTER");
     boot_screen();
-    int i = millis();
+    const uint32_t splashStart = millis();
+    Serial.printf("STARTUP %lu SPLASH_EXPOSURE_BEGIN\r\n", splashStart);
+    constexpr uint32_t SPLASH_DURATION_MS = 3200;
     // checks for boot.jpg in SD and LittleFS for customization
     int boot_img = 0;
     bool drawn = false;
@@ -316,10 +321,8 @@ void boot_screen_anim() {
 
     tft.drawPixel(0, 0, 0);       // Forces back communication with TFT, to avoid ghosting
                                   // Start image loop
-    while (millis() < i + 7000) { // boot image lasts for 5 secs
-        if ((millis() - i > 2000) && !drawn) {
-            tft.fillRect(0, 45, tftWidth, tftHeight - 45, bruceConfig.bgColor);
-            if (boot_img > 0 && !drawn) {
+    while (millis() - splashStart < SPLASH_DURATION_MS) {
+        if (boot_img > 0 && !drawn) {
                 tft.fillScreen(bruceConfig.bgColor);
                 if (boot_img == 5) {
                     drawImg(
@@ -347,33 +350,17 @@ void boot_screen_anim() {
                 tft.drawPixel(0, 0, 0); // Forces back communication with TFT, to avoid ghosting
             }
             drawn = true;
-        }
+            Serial.printf("STARTUP %lu CUSTOM_BOOT_IMAGE_DRAWN type=%d\r\n", millis(), boot_img);
 #if !defined(LITE_VERSION)
-        if (!boot_img && (millis() - i > 2200) && (millis() - i) < 2700)
-            tft.drawRect(2 * tftWidth / 3, tftHeight / 2, 2, 2, bruceConfig.priColor);
-        if (!boot_img && (millis() - i > 2700) && (millis() - i) < 2900)
-            tft.fillRect(0, 45, tftWidth, tftHeight - 45, bruceConfig.bgColor);
-        if (!boot_img && (millis() - i > 2900) && (millis() - i) < 3400)
-            tft.drawXBitmap(
-                2 * tftWidth / 3 - 30,
-                5 + tftHeight / 2,
-                bruce_small_bits,
-                bruce_small_width,
-                bruce_small_height,
-                bruceConfig.bgColor,
-                bruceConfig.priColor
-            );
-        if (!boot_img && (millis() - i > 3400) && (millis() - i) < 3600) tft.fillScreen(bruceConfig.bgColor);
-        if (!boot_img && (millis() - i > 3600))
-            tft.drawXBitmap(
-                (tftWidth - 238) / 2,
-                (tftHeight - 133) / 2,
-                bits,
-                bits_width,
-                bits_height,
-                bruceConfig.bgColor,
-                bruceConfig.priColor
-            );
+        if (!boot_img) {
+            const int barX = 28, barY = tftHeight - 34, barW = tftWidth - 56;
+            tft.drawRect(barX, barY, barW, 8, bruceConfig.priColor);
+            tft.fillRect(barX + 2, barY + 2, barW - 4, 4, bruceConfig.bgColor);
+            const int pulseW = 14;
+            const int travel = max(1, barW - pulseW - 4);
+            const int pulseX = barX + 2 + ((millis() - splashStart) / 70) % travel;
+            tft.fillRect(pulseX, barY + 2, pulseW, 4, bruceConfig.priColor);
+        }
 #endif
         if (check(AnyKeyPress)) // If any key or M5 key is pressed, it'll jump the boot screen
         {
@@ -383,6 +370,7 @@ void boot_screen_anim() {
         }
     }
 
+    Serial.printf("STARTUP %lu SPLASH_EXPOSURE_END elapsed=%lu\r\n", millis(), millis() - splashStart);
     // Clear splashscreen
     tft.fillScreen(bruceConfig.bgColor);
     Serial.println("BOOT SCREEN EXIT");
@@ -514,6 +502,7 @@ void setup() {
     esp_rom_printf(">>> BEFORE TFT INIT <<<\r\n");
     tft.init();
     esp_rom_printf(">>> AFTER TFT INIT <<<\r\n");
+    tft.fillScreen(TERMINAL_GREEN_BG);
 #else
     tft.begin();
 #endif

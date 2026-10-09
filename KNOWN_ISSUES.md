@@ -14,3 +14,17 @@
 - The `SMOOTH_FONT` override and initial geometry fix are now built and flashed; physical confirmation of submenu geometry is still required.
 - SD is not physically verified and has reported mount failures in runtime logs.
 - RFID, Sub-GHz, NFC, IR, CC1101, NRF24 and other optional modules are not claimed as physically tested in this DIY build.
+## Current verification status
+
+- Terminal Green and Pablo Signal are flashed and the runtime reaches the main menu on COM18.
+- Physical confirmation of the new palette, logo legibility and startup timing is still required.
+- Existing inherited macro redefinition warnings remain in the ESP-General compatibility header; they did not prevent the build or flash.
+- Final physical confirmation of the corrected Terminal Green colours, 3.2-second splash duration and blue-screen removal is still pending.
+- Splash correction is present in source but not yet flashed: the current PlatformIO environment stops during dependency installation with Windows code `0xC000013A` before compilation.
+- Aktualny splash został skompilowany, ale flash przez COM18 nie został zweryfikowany: port stał się zajęty/niedostępny po przerwanej próbie zapisu przy 83.1%.
+# Current known issues
+
+- The new Pablo Hacker bitmap has been compiled and flashed, but its final appearance on the physical TFT is not yet confirmed in this session.
+- `runtime.log` contains repeated `CUSTOM_BOOT_IMAGE_DRAWN type=0` diagnostic lines during splash exposure from an earlier diagnostic path; this is log noise, not a confirmed display failure.
+- Hardware documentation identifies inherited GPIO ambiguities: GPIO15/16 also occur in inherited button definitions, and the target overrides the inherited CC1101 CS default from GPIO10 to GPIO3.
+- Official Bruce App serial/mirroring compatibility with this fork is not physically verified. Native USB CDC is enabled and serial output works, but the app's live-mirror protocol has not been tested.

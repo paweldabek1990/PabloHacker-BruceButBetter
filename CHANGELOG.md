@@ -21,3 +21,22 @@ This file records confirmed local changes; it is not a replacement for the upstr
 ## Verification policy
 
 LCD color/text drawing and basic XPT2046 response are physically verified. Full peripheral support remains subject to separate hardware tests.
+## Unreleased — Terminal Green
+
+- Added the default Terminal Green RGB565 palette and a named `Terminal Green` UI Color entry.
+- Added the procedural `Pablo Signal` startup mark and a lightweight initialization progress bar.
+- Preserved the existing ESP32-S3 SPI, TFT, touch, geometry and SMOOTH_FONT fixes.
+- Built and flashed successfully to the tested ESP32-S3 target; physical visual confirmation is still pending.
+- Corrected persistent colour migration for existing `A80F/880F` configurations using `uiColorPreset`.
+- Cleared the TFT immediately after initialization to suppress the transient blue panel.
+- Extended the Pablo Hacker splash to 3.2 seconds.
+- Fixed the splash renderer clearing the generated Pablo Signal logo after drawing; exposure timing now starts after the final logo render and uses a decorative moving pulse instead of fake progress.
+- Added timestamped `STARTUP` diagnostics for splash rendering and exposure boundaries.
+- Replaced the Pablo Signal mark with a larger procedural cyber-mask/shield emblem inspired by the accepted cyber/hacker concept; no bitmap asset or heavy dependency was added.
+- Build/flash of this correction is pending because PlatformIO was interrupted while installing cached/missing dependencies before source compilation.
+# Unreleased — 2026-10-09
+
+- Added hardware wiring documentation, SVG diagram, reassembly checklist, and Bruce App compatibility notes.
+- Replaced the procedural Pablo splash emblem with a 160x155 RGB565 hooded cyber-hacker bitmap: green eyes, large `P`, and circuit details.
+- Added an exact 240x320 splash preview tied to the firmware asset and splash coordinates.
+- Built and flashed the `esp32-s3-n16r8-ili9341-touch` target successfully on the confirmed ESP32-S3 COM18. Physical visual confirmation of the new logo is still pending.

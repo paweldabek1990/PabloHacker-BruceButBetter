@@ -769,3 +769,113 @@ LOOP OPTIONS FIRST RENDER index=0 lambda=1
 ```
 
 Nie wykonano jeszcze fizycznego potwierdzenia poprawy pozycji menu na ekranie.
+
+## Audyt repozytorium — 2026-10-09
+
+- `C:\BruceTouch` został zainicjalizowany jako lokalne repozytorium Git na gałęzi `main`.
+- W katalogu nie było wcześniejszej historii commitów ani skonfigurowanego remote; historia upstream nie została nadpisana ani udawana.
+- Zachowano rootową licencję AGPL-3.0 oraz atrybucję Bruce/pr3y. Dokładny upstream commit bazowy: **BRAK DANYCH**.
+- Dodano dokumentację sprzętu, statusu funkcji, planowanych obudów, bezpieczeństwa publikacji oraz workflow budujący target `esp32-s3-n16r8-ili9341-touch`.
+- Nie zmieniano kodu firmware, pinoutu, konfiguracji SPI ani działającego BIN podczas przygotowania repozytorium.
+- Ostatni potwierdzony build/flash pozostaje tym z `logs/20261009-002003`; szczegóły i sumy SHA-256 są powyżej.
+- Przegląd konfiguracji nie wykazał potwierdzonych haseł ani tokenów. Występują jedynie puste/placeholderowe pola konfiguracyjne; logi lokalne i artefakty builda są wykluczone przez `.gitignore`.
+- `gh` CLI nie jest zainstalowane w środowisku, więc nie wykonano sprawdzenia ani utworzenia repozytorium GitHub.
+- Pierwszy commit lokalny oczekuje na jawnie skonfigurowaną tożsamość Git; nie ustawiano globalnego autora.
+
+## Terminal Green / Pablo Signal — 2026-10-09
+
+- Backup źródeł i konfiguracji: `C:\BruceTouch\backups\20261009-005807-before-terminal-green`.
+- Backup działającego BIN znajduje się w tym samym katalogu backupu.
+- Zmienione pliki: `src/core/theme.h`, `src/core/settingsColor.h`, `src/core/config.cpp`, `src/main.cpp`.
+- Paleta RGB565: primary `0x3FE2`, secondary `0xB7F3`, background `0x0841`, dim/accent `0x2183`.
+- Dodano nazwany wpis UI Color `Terminal Green`. Stara niezmieniona konfiguracja kolorów jest migrowana w pamięci do tej palety; zapisane wybory użytkownika pozostają nadrzędne.
+- `boot_screen()` rysuje proceduralne logo `Pablo Signal` (litera P + łuki sygnału), a `boot_screen_anim()` pokazuje krótki pasek postępu. Nie używa rekina ani nowego bitmapowego zasobu.
+- Build: SUCCESS, RAM `125692 / 327680` (38.4%), Flash `3576463 / 4653056` (76.9%).
+- BIN: `C:\BruceTouch\Bruce-esp32-s3-n16r8-ili9341-touch.bin`, 3642544 bajty.
+- BIN SHA-256: `78F035231C5C83B4067A63D6EB5C678348D9991B46C232581BE06DB2B0A19D34`.
+- ELF SHA-256: `8593F9F3BC2459448A48EE638FF911BBB0AD46E74089BE46A7D12E06315BAF2A`.
+- Flash: COM18, zapis zakończony; niezależne `verify-flash`: `Verification successful (digest matched)`.
+- Runtime: `C:\BruceTouch\logs\20261009-015000-terminal-green-runtime.log`; urządzenie przechodzi przez boot screen do głównego menu bez crasha.
+- Ostrzeżenia builda: odziedziczone redefinicje makr z `boards/ESP-General/pins_arduino.h` (`CC1101_*`, `SDCARD_*`, `NRF24_*`, `ROTATION`, `SMOOTH_FONT`, `DEVICE_NAME`); brak nowych błędów kompilacji.
+- Fizyczne potwierdzenie nowego motywu/logo: **BRAK DANYCH**.
+
+## Pablo migration correction — 2026-10-09
+
+- Runtime przed poprawką wykazał `bg=0000 pri=A80F sec=880F`; wcześniejsza migracja nie działała, bo wymagała dokładnie starego zestawu `A80F/CB76/0000`.
+- Dodano trwałe pole konfiguracji `uiColorPreset`. Gdy jest puste i nie ma pliku motywu, migracja ustawia Terminal Green i zapisuje pełny config przez istniejące `saveFile()`.
+- Po migracji runtime potwierdził: `bg=0841 pri=3FE2 sec=B7F3`.
+- Po `tft.init()` firmware natychmiast czyści ekran `TERMINAL_GREEN_BG`, co eliminuje firmware'owy niebieski ekran przejściowy.
+- Splash `Pablo Hacker` ma teraz czas 3200 ms; fizyczne potwierdzenie czasu i wyglądu nadal należy do użytkownika.
+- Build: SUCCESS; RAM `125708 / 327680` (38.4%), Flash `3576499 / 4653056` (76.9%).
+- BIN: 3642576 bajtów; SHA-256 `3D41D814ED243BA35F8BCCEEB24175E997EA750DF10F95515794A2483E8B25BC`.
+- ELF SHA-256: `BB89F6CE6EFF44686F39957F65845C6ABEF55D66CF4A96C9322569F79886F480`.
+- Flash: COM18, `Hash of data verified`; log: `logs/20261009-012838-pablo-migration/flash.log`.
+- Runtime: `logs/20261009-012838-pablo-migration/runtime.log`; menu startuje z potwierdzonymi wartościami Terminal Green.
+
+## Splash correction — 2026-10-09
+
+- Przyczyna: `boot_screen_anim()` bezwarunkowo wykonywał `tft.fillRect(0, 45, tftWidth, tftHeight - 45, bruceConfig.bgColor)` po `boot_screen()`. Dla domyślnego, proceduralnego splash screenu kasowało to logo i napisy. Timer 3200 ms rozpoczynał się również przed zakończeniem tej ścieżki rysowania.
+- Zmiana: `src/main.cpp`; wygenerowany splash nie jest już czyszczony po narysowaniu. Czyszczenie pozostaje tylko dla zewnętrznego obrazu boot. Timer `SPLASH_EXPOSURE_BEGIN` rozpoczyna się po `BOOT_DRAW_DONE`, a pasek jest dekoracyjnym impulsem bez fałszywego procentowego postępu. Dodano znaczniki `STARTUP` z czasem `millis()`.
+- Logo: proceduralne `Pablo Signal`, 86x86 px, pozycjonowane na ekranie logicznym 240x320.
+- Sekwencja zamierzona: TFT init → czarne tło → logo/napisy → ekspozycja minimum 3200 ms → czyszczenie → menu.
+- Niebieski obraz przed `AFTER TFT INIT` może pochodzić z fazy inicjalizacji kontrolera TFT/biblioteki i nie jest sterowalny przez firmware przed `tft.init()`; firmware czyści ekran bezpośrednio po tej funkcji.
+- Build: NIE WYKONANO. PlatformIO zakończyło proces kodem `-1073741510` (`0xC000013A`) podczas instalowania zależności (`NimBLE-Arduino`, `ESP-PN532-UART`), przed kompilacją źródeł. Logi: `logs/20261009-015658-splash-fix/build.log`, `build-2.log`, `build-3.log`, `build-final.log`, `build-exit.log`.
+- Flash: NIE WYKONANO; istniejący BIN nie odpowiada tej zmianie i nie został użyty.
+
+### Build retry / flash status
+
+- Pierwszy pełny proces doszedł do kompilacji i ujawnił nadmiarowy nawias w `boot_screen_anim()`; poprawiono wyłącznie strukturę bloku bez zmiany zachowania wizualnego.
+- Drugi pełny build zakończył się `SUCCESS` po około 2:58. RAM: `125708 / 327680` (38.4%). Flash: `3576843 / 4653056` (76.9%). W logu pozostały odziedziczone ostrzeżenia redefinicji makr oraz ostrzeżenia ODR; brak błędów kompilatora.
+- BIN: `C:\BruceTouch\Bruce-esp32-s3-n16r8-ili9341-touch.bin`, 3,642,928 bajtów, utworzony `2026-10-09 02:10:49`. SHA-256: `F6219DA41FA46A730572A205B556F5FBB1DCA2613150DD1F00BC383F6DE00201`.
+- ELF SHA-256: `E1D697E8569BB4C020C16033D9A2EF4A90947A0F91FBF676401D02688F98D38C`.
+- Próba flashowania przez COM18 została przerwana przez limit sesji przy 83.1% zapisu; ponowienie zwróciło `Could not open COM18, the port is busy or doesn't exist` / `PermissionError(13)`. `mode COM18`: `Device COM18 is not currently available`.
+- Flash i runtime nowej wersji: **BRAK DANYCH**. Nie potwierdzam, że urządzenie otrzymało kompletny obraz.
+
+### Flash retry — 2026-10-09
+
+- Wykryto ESP32-S3 na COM18 (`VID_303A`, `PID_1001`, USB-Serial/JTAG, PSRAM 8 MB, MAC `e0:72:a1:db:b1:70`). COM10 został pominięty jako zajęty i niezidentyfikowany.
+- `esptool v5.1.0 --chip esp32s3 --port COM18 write-flash 0x0` zakończył zapis 3,642,928 bajtów i zgłosił `Hash of data verified`; nie wykonano `erase_flash` i nie kasowano NVS.
+- Po flashowaniu natywne COM18 pozostało zajęte przez sesję terminalową, dlatego przechwycenie runtime nie powiodło się (`Access denied`). Runtime nowej wersji: **BRAK DANYCH**.
+
+### Flash retry completed — 2026-10-09 02:21
+
+- Właściwy port ponownie potwierdzony: COM18, `VID_303A:PID_1001`, USB-Serial/JTAG, ESP32-S3 v0.2, PSRAM 8 MB, MAC `e0:72:a1:db:b1:70`.
+- Existing BIN flashed at `0x0`; `erase_flash` i kasowanie NVS nie były używane.
+- Flash: SUCCESS; 3,642,928 bajtów zapisanych; `Hash of data verified`.
+- Runtime: `logs/20261009-022125-flash-retry/runtime.log`; potwierdzone `SPLASH_EXPOSURE_END elapsed=3200`, `BOOT SCREEN EXIT`, `SETUP EXIT BEFORE LOOP` i `MAIN LOOP MENU ENTER bg=0841 pri=3FE2 sec=B7F3 size=240x275`.
+- Runtime zgłosił `esp_ota_ops: not found otadata`, ale kontynuował uruchomienie menu bez crasha.
+
+## Pablo Hacker emblem update — 2026-10-09
+
+- Zmieniono wyłącznie rysunek proceduralny w `src/main.cpp::boot_screen()`. Nowy emblemat to tarcza cybernetyczna z uproszczoną maską, oczami, liniami obwodu i akcentami sygnałowymi w palecie Terminal Green.
+- Backup: `backups/20261009-022852-before-pablo-emblem`.
+- Build SUCCESS: RAM `125708/327680` (38.4%), Flash `3577103/4653056` (76.9%).
+- BIN: `Bruce-esp32-s3-n16r8-ili9341-touch.bin`, 3,643,184 bajty, SHA-256 `A2C96153916C4C79580DFF94D41C97683404FC82C057BC8E74A84889E62F0865`.
+- Flash SUCCESS przez COM18 pod `0x0`; `Hash of data verified`.
+- Runtime: `logs/20261009-023227-pablo-emblem/runtime.log`; ekspozycja `3201 ms`, menu wystartowało z Terminal Green. Fizyczna ocena nowego logo: **BRAK DANYCH**.
+# 2026-10-09 — Pablo Hacker bitmap + hardware documentation
+
+## Hardware documentation
+
+Added the reproducible wiring table and diagrams in `HARDWARE_WIRING.md`, `docs/hardware/pinout.md`, `docs/hardware/wiring.svg`, and `docs/hardware/reassembly-checklist.md`. The documented TFT/touch wiring is the physically tested configuration: GPIO 12/11/13 shared as SCK/MOSI/MISO, TFT CS/DC/RST 15/17/16, touch CS 10, T_IRQ not connected, and 3V3/GND power. SD and other module lines are marked as configured or unverified where no physical confirmation exists.
+
+## Pablo Hacker bitmap experiment
+
+- Backup: `backups/20261009-022852-before-pablo-emblem`.
+- Firmware asset: `src/assets/pablo_logo.h`, RGB565 `160x155`, stored in flash with `PROGMEM`; pixel payload is 49,600 bytes and the generated header is 208,931 bytes.
+- Splash preview: `docs/assets/pablo-splash-preview.png`, exactly `240x320`. Text rendering is marked approximate because host preview text cannot reproduce TFT_eSPI's runtime font byte-for-byte.
+- `src/main.cpp::boot_screen()` now draws the bitmap at `(40,16)`, then `PABLO HACKER` and `PABLO SIGNAL`, while preserving the existing splash timing and Terminal Green colors.
+
+## Build and flash
+
+- Environment: `esp32-s3-n16r8-ili9341-touch`; Arduino-ESP32 3.3.6; esptool 5.1.0.
+- Build: SUCCESS, 00:02:48.008. RAM 125708/327680 (38.4%); Flash 3626815/4653056 (77.9%).
+- Merged BIN: `Bruce-esp32-s3-n16r8-ili9341-touch.bin`, 3,692,896 bytes.
+- BIN SHA-256: `61232F069EE6A39D43053DA2A42413EEED63EFFCE56A0A62481FACF939813EE3`.
+- ELF SHA-256: `0A3FB300A6EAFFE14C4FAF3A6CD3DB7E6D643E209D3A923AA156073558A75BA2`.
+- Device: ESP32-S3, 8 MB PSRAM, confirmed on COM18; MAC `e0:72:a1:db:b1:70`.
+- Flash: SUCCESS with hash verification; no `erase_flash` and no NVS erase.
+- Runtime: reached `SPLASH_EXPOSURE_END elapsed=3202`, `BOOT SCREEN EXIT`, and `MAIN LOOP MENU ENTER bg=0841 pri=3FE2 sec=B7F3 size=240x275`; no crash observed in the capture.
+- Logs: latest dated directory under `logs/` contains `build.log`, `flash.log`, `flash-retry.log`, and `runtime.log`. The first flash attempt failed before writing due to Windows CP1252 encoding in esptool; the UTF-8 retry succeeded.
+
+Visual appearance on the physical TFT remains pending user confirmation.
