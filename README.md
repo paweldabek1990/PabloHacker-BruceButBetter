@@ -55,8 +55,8 @@ The audit of the local checkout, commits, tests, and publication hygiene is in [
 
 ## Actions and roadmap
 
-`.github/workflows/platformio.yml` builds the real target and uploads artifacts; it never flashes hardware. Roadmap: complete row-level AS_BUILT verification, test SD/peripherals, test Bruce App compatibility, resolve inherited GPIO ambiguities, then publish a reviewed public repository.
+`.github/workflows/platformio.yml` builds the real target and uploads artifacts; it never flashes hardware. Roadmap: complete row-level AS_BUILT verification, test SD/peripherals, test Bruce App compatibility, and resolve inherited GPIO ambiguities.
 
 ## Provenance and license
 
-Upstream attribution and the repository `LICENSE` are retained. BruceButBetter is associated with Yoursel71; Bruce firmware is maintained by BruceDevices. This is an unofficial, unpublished variant. Review the full [AGPL-3.0 license](LICENSE) before redistribution and preserve source/license obligations.
+Upstream attribution and the repository `LICENSE` are retained. BruceButBetter is associated with Yoursel71; Bruce firmware is maintained by BruceDevices. This is an unofficial public variant. Review the full [AGPL-3.0 license](LICENSE) before redistribution and preserve source/license obligations.
