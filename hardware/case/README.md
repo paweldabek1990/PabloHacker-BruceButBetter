@@ -7,7 +7,7 @@ This directory contains a printable-design starting point for the Pablo Hacker R
 - **A1** — touch-only, right-side stylus holder, no external controls.
 - **A2** — same base envelope, with two optional BACK/SELECT button provisions. The button GPIO assignment is intentionally not part of firmware and must be selected only after a free-GPIO audit.
 
-The common shell source is [rugged_a.scad](rugged_a.scad). Set `variant="A1"` or `variant="A2"`.
+The common shell source is [rugged_a.scad](rugged_a.scad). Convenience wrappers are [rugged_a1.scad](rugged_a1.scad) and [rugged_a2.scad](rugged_a2.scad).
 
 ## Measurement status
 
