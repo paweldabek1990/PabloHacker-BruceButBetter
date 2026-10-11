@@ -10,10 +10,7 @@
 
 ## The journey: five iterations
 
-| 01 · Small OLED | 02 · First TFT | 03 · Raw menu | 04 · Illustrated tiles | 05 · Cyber Dashboard V2 |
-|:---:|:---:|:---:|:---:|:---:|
-| I²C SH1106 tests; tiny display, glitches | ILI9341 2.8″ wired on breadboard; touch integration | UI clipping, alignment and navigation problems | Distinct tile illustrations and recognizable Pablo Hacker style | Current visual direction, submenu and touch refinement |
-| Historical prototype | Hardware bring-up | Early functional UI | Design iteration | **Work in progress** |
+<p align="center"><img src="docs/showcase/development-journey.svg" width="100%" alt="Pięć etapów rozwoju: OLED, TFT, menu, ilustracje, Cyber Dashboard V2"></p>
 
 **Photo archive is being assembled:** authentic OLED wiring photo → first TFT on breadboard → clipped UI → first illustrated tiles → approved V2 screen exports. Historical images will only be labeled as physical evidence if actually photographed; see [image provenance and integration plan](docs/showcase/ASSET_MANIFEST.md).
 
