@@ -1,33 +1,52 @@
-# Pablo Hacker — BruceButBetter
+<p align="center"><img src="docs/showcase/pablo-hacker-reference.png" width="100%" alt="BruceButBetter — Pablo Hacker Edition"></p>
+<p align="center"><a href="README_PL.md">🇵🇱 Polski</a> · <a href="README.md">🇬🇧 English</a></p>
 
-Nieoficjalny wariant sprzętowy BruceButBetter dla ESP32-S3-WROOM-1 N16R8 z ekranem TPM408-2.8 ILI9341 240×320 oraz dotykiem XPT2046.
+# BruceButBetter / Pablo Hacker Edition
 
-## Status
+**Cyber Dashboard V2** · ESP32-S3-WROOM-1 N16R8 · ILI9341 240×320 · XPT2046
 
-Firmware uruchamia pełne menu, Terminal Green, ekran startowy Pablo Hacker i obsługę dotyku. Fizycznie potwierdzono TFT, dotyk, menu, skanowanie Wi-Fi oraz standardową reklamę BLE `BRUCE-BLE-TEST`. Moduły CC1101, NRF24, PN532/RFID, IR, Si5351, SD i pozostałe rozszerzenia pozostają niezweryfikowane fizycznie, jeśli nie wskazano inaczej w dokumentacji.
+![Status](https://img.shields.io/badge/status-aktywny_rozwój-00bfa8?style=for-the-badge) ![ESP32-S3](https://img.shields.io/badge/MCU-ESP32--S3-00a5cb?style=for-the-badge) ![ILI9341](https://img.shields.io/badge/wyświetlacz-ILI9341_240%C3%97320-10ae97?style=for-the-badge) ![PlatformIO](https://img.shields.io/badge/build-PlatformIO-f58220?style=for-the-badge)
 
-## Sprzęt i GPIO
+> Rzeczywisty zapis rozwoju sprzętu i interfejsu — od małego eksperymentu z OLED-em SH1106 do kierunku Pablo Hacker Edition. Grafika pozostaje grafiką; nie przedstawiamy jej jako dowodu gotowej obudowy ani ukończonego urządzenia.
 
-Pełna tabela znajduje się w [HARDWARE_WIRING.md](HARDWARE_WIRING.md) oraz [docs/hardware/pinout.md](docs/hardware/pinout.md). Główne SPI: MOSI GPIO11, SCK GPIO12, MISO GPIO13; TFT CS15/DC17/RST16; Touch CS10; SD CS14.
+## Nasza droga rozwoju
 
-## Budowanie
+Poniższe pięć etapów opisuje progres bez tworzenia fikcyjnych fotografii historycznych. Jako eksporty projektu pokazujemy tylko pliki o znanym pochodzeniu.
 
-```powershell
-pio run -e esp32-s3-n16r8-ili9341-touch
-```
+| 1 · OLED SH1106 | 2 · Pierwszy ILI9341 | 3 · Surowe menu | 4 · Ulepszone kafelki | 5 · Cyber Dashboard V2 |
+|---|---|---|---|---|
+| Pierwszy prototyp, mały ekran, artefakty i ograniczenia. | Okablowanie i sterowniki pierwszego TFT 240×320. | Działające podstawy, ucięte elementy i błędy nawigacji. | Rozwój układu i ilustracji pod czytelne kafelki dotykowe. | Zatwierdzony kierunek wizualny; integracja i testy trwają. |
 
-Konfiguracja używa pioarduino / Arduino-ESP32 3.3.6. Przed flashowaniem zawsze zidentyfikuj układ przez `esptool chip-id`; nie używaj `erase_flash` i nie kasuj NVS.
+<p align="center"><img src="docs/showcase/screens/overview.png" width="100%" alt="Eksport widoku Cyber Dashboard V2"></p>
+
+## Aktualny interfejs · autentyczne eksporty 240×320
+
+<table>
+<tr><td align="center"><strong>Main Menu</strong><br><img src="docs/showcase/screens/overview.png" width="240" alt="Main Menu"></td><td align="center"><strong>Bluetooth</strong><br><img src="docs/showcase/screens/bluetooth-final-preview.png" width="240" alt="Ekran Bluetooth"></td><td align="center"><strong>BLE Scanner</strong><br><img src="docs/showcase/screens/scanner-final-preview.png" width="240" alt="Skaner BLE"></td></tr>
+<tr><td align="center"><strong>Scan Results</strong><br><img src="docs/showcase/screens/results-final-preview.png" width="240" alt="Wyniki skanowania"></td><td align="center"><strong>Settings</strong><br><img src="docs/showcase/screens/settings-final-preview.png" width="240" alt="Ustawienia"></td><td align="center"><strong>Karty BLE / iBeacon</strong><br><img src="docs/showcase/screens/ble-scan-card.png" width="240" alt="Karta skanowania BLE"><br><img src="docs/showcase/screens/ibeacon-card.png" width="240" alt="Karta iBeacon"></td></tr>
+</table>
+
+## Sprzęt i dokumentacja
+
+| Podzespół | Aktualna definicja projektu |
+|---|---|
+| Kontroler | ESP32-S3-WROOM-1 N16R8 · 16 MB Flash · 8 MB PSRAM |
+| Wyświetlacz | ILI9341 240×320 |
+| Dotyk | Rezystancyjny kontroler XPT2046 |
+| Build | PlatformIO, środowisko `esp32-s3-n16r8-ili9341-touch` |
+| Połączenia | [Schemat GPIO i okablowanie](HARDWARE_WIRING.md) |
+
+**Potwierdzony stan projektu:** udokumentowano uruchomienie wyświetlacza, ścieżkę dotyku na testowanych ekranach oraz proces budowania i flashowania firmware. Pełna nawigacja, powrót BLE, podmenu, spójność wizualna i końcowe testy fizyczne pozostają w toku. Nie deklarujemy gotowej obudowy 3D ani fikcyjnych wyników testów.
+
+## Dalsze kroki
+
+- dokończyć i zweryfikować ścieżki menu oraz nawigacji;
+- kontynuować integrację sprzętową i testy fizyczne;
+- synchronizować eksporty 240×320 i informacje o pochodzeniu grafik;
+- zapisywać zmiany w [historii zmian](CHANGELOG.md).
 
 ## Dokumentacja
 
-- [README.md](README.md) — wersja angielska
-- [UPSTREAM.md](UPSTREAM.md) — pochodzenie i licencja
-- [HARDWARE_WIRING.md](HARDWARE_WIRING.md) — okablowanie
-- [docs/hardware/rugged-a.md](docs/hardware/rugged-a.md) — obudowa Rugged A1
-- [DIAGNOSTYKA.md](DIAGNOSTYKA.md) — dziennik techniczny
-- [KNOWN_ISSUES.md](KNOWN_ISSUES.md) — znane ograniczenia
-- [docs/hardware/AS_BUILT/VERIFICATION_REPORT.md](docs/hardware/AS_BUILT/VERIFICATION_REPORT.md) — ostrożna dokumentacja ze zdjęć rzeczywistego zestawu
+[Build Guide](docs/software/build.md) · [Diagnostyka](DIAGNOSTYKA.md) · [Znane problemy](KNOWN_ISSUES.md) · [Historia zmian](CHANGELOG.md) · [Wykaz grafik](docs/showcase/ASSET_MANIFEST.md)
 
-Zdjęcia potwierdzają obecność trzech płytek stykowych i modułów, ale nie pozwalają jeszcze jednoznacznie odtworzyć każdego przewodu, rzędu ani mostka zasilania. Nie rozłączaj działającego zestawu wyłącznie na podstawie roboczej dokumentacji AS_BUILT.
-
-Projekt jest przeznaczony wyłącznie do autoryzowanych testów, edukacji i pracy na własnym sprzęcie/sieci.
+<sub>Nieoficjalny wariant <a href="https://github.com/Yoursel71/BruceButBetter">BruceButBetter</a>. Zachowano autorstwo, atrybucję i <a href="LICENSE">licencję</a>. Funkcje bezpieczeństwa wyłącznie do autoryzowanych testów i nauki.</sub>

@@ -1,62 +1,52 @@
-# Pablo Hacker — BruceButBetter
+<p align="center"><img src="docs/showcase/pablo-hacker-reference.png" width="100%" alt="BruceButBetter — Pablo Hacker Edition"></p>
+<p align="center"><a href="README_PL.md">🇵🇱 Polski</a> · <a href="README.md">🇬🇧 English</a></p>
 
-Unofficial hardware variant of [BruceButBetter](https://github.com/Yoursel71/BruceButBetter) for an ESP32-S3-WROOM-1 N16R8 with a 2.8-inch ILI9341 TFT and XPT2046 resistive touch controller. The full Bruce source tree is retained; this repository adds a reproducible DIY hardware target.
+# BruceButBetter / Pablo Hacker Edition
 
-> Security features are for authorized testing, education, and devices/networks you own.
+**Cyber Dashboard V2** · ESP32-S3-WROOM-1 N16R8 · ILI9341 240×320 · XPT2046
 
-## Status
+![Status](https://img.shields.io/badge/status-active_development-00bfa8?style=for-the-badge) ![ESP32-S3](https://img.shields.io/badge/MCU-ESP32--S3-00a5cb?style=for-the-badge) ![ILI9341](https://img.shields.io/badge/display-ILI9341_240%C3%97320-10ae97?style=for-the-badge) ![PlatformIO](https://img.shields.io/badge/build-PlatformIO-f58220?style=for-the-badge)
 
-The target `esp32-s3-n16r8-ili9341-touch` builds, boots into the full menu, uses Terminal Green, and supports touch navigation. ILI9341 color/text and XPT2046 coordinate tests were physically confirmed. The last firmware was flashed and verified on an ESP32-S3 over COM18. The latest RGB565 bitmap byte-order fix still requires final physical color confirmation.
+> A real hardware and interface development log, from a small SH1106 OLED experiment to the Pablo Hacker Edition touchscreen direction. The artwork is preserved as artwork; it is not presented as proof of a finished enclosure or completed hardware.
 
-## Hardware and GPIO
+## Our development journey
 
-- ESP32-S3-WROOM-1 N16R8: 16 MB flash, 8 MB PSRAM, two USB-C connectors.
-- TPM408-2.8: ILI9341, 240×320, resistive XPT2046 touch, SD slot.
-- Shared SPI: GPIO11 MOSI, GPIO12 SCK, GPIO13 MISO.
+The five stages below describe the progression without inventing historical photographs. Only assets with known provenance are presented as project exports.
 
-| Signal | GPIO | Module pin | Evidence |
-|---|---:|---|---|
-| TFT SCK / touch T_CLK | 12 | SCK / T_CLK | physical |
-| TFT MOSI / touch T_DIN | 11 | SDA/MOSI / T_DIN | physical |
-| TFT MISO / touch T_DO | 13 | SDO/MISO / T_DO | physical |
-| TFT CS | 15 | CS | physical |
-| TFT DC | 17 | DC | physical |
-| TFT RESET | 16 | RST | physical |
-| Touch CS | 10 | T_CS | physical |
-| Touch IRQ | — | T_IRQ | NC |
-| Power | 3V3/GND | VCC/LED/GND | physical |
-| SD CS | 14 | SD CS | configured, unverified |
+| 1 · SH1106 OLED | 2 · First ILI9341 | 3 · Raw menu | 4 · Improved tiles | 5 · Cyber Dashboard V2 |
+|---|---|---|---|---|
+| First prototype, small screen, visible artefacts and hard limits. | Wiring and driver experiments around the 240×320 TFT. | Working foundations, clipped elements and navigation bugs. | Layout and illustration work moved toward readable touch tiles. | Approved visual direction; integration and testing remain in progress. |
 
-See [HARDWARE_WIRING.md](HARDWARE_WIRING.md), [pinout](docs/hardware/pinout.md), [SVG](docs/hardware/wiring.svg), and [reassembly checklist](docs/hardware/reassembly-checklist.md). GPIO15/16 also occur in inherited button definitions; CC1101 CS is overridden to GPIO3 for this target.
+<p align="center"><img src="docs/showcase/screens/overview.png" width="100%" alt="Cyber Dashboard V2 overview export"></p>
 
-The newly supplied photographs are documented in [AS_BUILT](docs/hardware/AS_BUILT/VERIFICATION_REPORT.md). They confirm the three-board assembly, but do **not** yet prove every wire endpoint or breadboard row. Do not disassemble the working setup using the AS_BUILT draft as a complete reconstruction map.
+## Current interface · authentic 240×320 exports
 
-## Features and evidence
+<table>
+<tr><td align="center"><strong>Main Menu</strong><br><img src="docs/showcase/screens/overview.png" width="240" alt="Main Menu"></td><td align="center"><strong>Bluetooth</strong><br><img src="docs/showcase/screens/bluetooth-final-preview.png" width="240" alt="Bluetooth screen"></td><td align="center"><strong>BLE Scanner</strong><br><img src="docs/showcase/screens/scanner-final-preview.png" width="240" alt="BLE Scanner"></td></tr>
+<tr><td align="center"><strong>Scan Results</strong><br><img src="docs/showcase/screens/results-final-preview.png" width="240" alt="Scan Results"></td><td align="center"><strong>Settings</strong><br><img src="docs/showcase/screens/settings-final-preview.png" width="240" alt="Settings"></td><td align="center"><strong>BLE / iBeacon cards</strong><br><img src="docs/showcase/screens/ble-scan-card.png" width="240" alt="BLE scan card"><br><img src="docs/showcase/screens/ibeacon-card.png" width="240" alt="iBeacon card"></td></tr>
+</table>
 
-The source contains Wi-Fi, BLE, USB/HID, Sub-GHz/CC1101, NRF24, PN532/RFID, IR, Si5351, filesystem, Ethernet, GPS, LoRa, and other Bruce modules. Compilation proves inclusion, not physical operation. Physically exercised: display, touch, full menu navigation, Wi-Fi scan/navigation, Terminal Green, and splash timing. RF, NFC/RFID, IR, SD, optional radios, and Bruce App mirroring remain unverified.
+## Hardware & documentation
 
-## Build and flash
+| Component | Current project definition |
+|---|---|
+| Controller | ESP32-S3-WROOM-1 N16R8 · 16 MB Flash · 8 MB PSRAM |
+| Display | ILI9341 240×320 |
+| Touch | XPT2046 resistive touch controller |
+| Build | PlatformIO environment `esp32-s3-n16r8-ili9341-touch` |
+| Wiring | [GPIO and hardware wiring](HARDWARE_WIRING.md) |
 
-```powershell
-pio run -e esp32-s3-n16r8-ili9341-touch
-```
+**Confirmed project state:** the display bring-up, touch path on tested screens, and firmware build/flash workflow are documented. Full menu flow, BLE Back behavior, submenu behavior, visual consistency and final physical acceptance testing are still under development. No finished 3D enclosure or fictional test result is claimed here.
 
-The project pins pioarduino release 55.03.36 / Arduino-ESP32 3.3.6. The merged image is `Bruce-esp32-s3-n16r8-ili9341-touch.bin`. Identify the board with `esptool chip-id` first; the previous confirmed device was ESP32-S3, VID `303A`, PID `1001`, COM18. Never assume the port, flash an ESP32-CAM, use `erase_flash`, or erase NVS.
+## Next steps
 
-## Pablo Hacker splash
-
-The 160×155 RGB565 `PROGMEM` asset is [src/assets/pablo_logo.h](src/assets/pablo_logo.h). `src/main.cpp::boot_screen()` draws it on the 240×320 panel, then `PABLO HACKER` and `PABLO SIGNAL`, preserving approximately 3.2 seconds. [Preview](docs/assets/pablo-splash-preview.png) is not physical proof.
+- complete and verify the remaining menu/navigation paths;
+- continue hardware integration and physical acceptance tests;
+- keep the 240×320 exports and provenance notes synchronized with the implementation;
+- document changes in the [changelog](CHANGELOG.md).
 
 ## Documentation
 
-[DIAGNOSTYKA.md](DIAGNOSTYKA.md) · [CHANGELOG.md](CHANGELOG.md) · [KNOWN_ISSUES.md](KNOWN_ISSUES.md) · [build guide](docs/software/build.md) · [validation](docs/testing/validation-status.md) · [Bruce App analysis](docs/hardware/remote-diagnostics.md) · [CONTRIBUTING.md](CONTRIBUTING.md)
+[Build Guide](docs/software/build.md) · [Diagnostics](DIAGNOSTYKA.md) · [Known Issues](KNOWN_ISSUES.md) · [Changelog](CHANGELOG.md) · [Asset Manifest](docs/showcase/ASSET_MANIFEST.md)
 
-The audit of the local checkout, commits, tests, and publication hygiene is in [docs/software/repository-audit.md](docs/software/repository-audit.md).
-
-## Actions and roadmap
-
-`.github/workflows/platformio.yml` builds the real target and uploads artifacts; it never flashes hardware. Roadmap: complete row-level AS_BUILT verification, test SD/peripherals, test Bruce App compatibility, and resolve inherited GPIO ambiguities.
-
-## Provenance and license
-
-Upstream attribution and the repository `LICENSE` are retained. BruceButBetter is associated with Yoursel71; Bruce firmware is maintained by BruceDevices. This is an unofficial public variant. Review the full [AGPL-3.0 license](LICENSE) before redistribution and preserve source/license obligations.
+<sub>Unofficial variant of <a href="https://github.com/Yoursel71/BruceButBetter">BruceButBetter</a>. Original authorship, attribution and <a href="LICENSE">license</a> are retained. Security features are for authorized testing and education.</sub>
