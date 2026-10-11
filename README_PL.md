@@ -1,39 +1,52 @@
-<p align="center"><img src="docs/showcase/hero.svg" width="100%" alt="BruceButBetter Pablo Hacker Edition — Cyber Dashboard V2"></p>
+<p align="center"><img src="docs/showcase/pablo-hacker-reference.png" width="100%" alt="BruceButBetter — Pablo Hacker Edition"></p>
 <p align="center"><a href="README_PL.md">🇵🇱 Polski</a> · <a href="README.md">🇬🇧 English</a></p>
+
 # BruceButBetter / Pablo Hacker Edition
 
 **Cyber Dashboard V2** · ESP32-S3-WROOM-1 N16R8 · ILI9341 240×320 · XPT2046
 
-![Rozwój](https://img.shields.io/badge/status-aktywny_rozwój-00bfa8?style=for-the-badge) ![ESP32](https://img.shields.io/badge/MCU-ESP32--S3-00a5cb?style=for-the-badge) ![Dotyk](https://img.shields.io/badge/Dotyk-XPT2046-10ae97?style=for-the-badge)
+![Status](https://img.shields.io/badge/status-aktywny_rozwój-00bfa8?style=for-the-badge) ![ESP32-S3](https://img.shields.io/badge/MCU-ESP32--S3-00a5cb?style=for-the-badge) ![ILI9341](https://img.shields.io/badge/wyświetlacz-ILI9341_240%C3%97320-10ae97?style=for-the-badge) ![PlatformIO](https://img.shields.io/badge/build-PlatformIO-f58220?style=for-the-badge)
 
-> **Od maleńkiego OLED-a do własnego urządzenia z dotykowym ekranem.** To nieoficjalny wariant BruceButBetter i zapis faktycznych prób z elektroniką, firmware i interfejsem. Wizualizacje koncepcyjne nie są przedstawiane jako zdjęcia działającego sprzętu.
+> Rzeczywisty zapis rozwoju sprzętu i interfejsu — od małego eksperymentu z OLED-em SH1106 do kierunku Pablo Hacker Edition. Grafika pozostaje grafiką; nie przedstawiamy jej jako dowodu gotowej obudowy ani ukończonego urządzenia.
 
-## Nasza droga: pięć etapów
+## Nasza droga rozwoju
 
-<p align="center"><img src="docs/showcase/development-journey.svg" width="100%" alt="Pięć etapów rozwoju: OLED, TFT, menu, ilustracje, Cyber Dashboard V2"></p>
+Poniższe pięć etapów opisuje progres bez tworzenia fikcyjnych fotografii historycznych. Jako eksporty projektu pokazujemy tylko pliki o znanym pochodzeniu.
 
-**Archiwum zdjęć jest kompletowane:** prawdziwa fotografia OLED-a → pierwszy TFT na płytce stykowej → ucięte menu → pierwsze kafelki → zaakceptowane projekty V2. Nie oznaczamy rekonstrukcji jako autentycznych zdjęć. [Wykaz i pochodzenie obrazów](docs/showcase/ASSET_MANIFEST.md).
+| 1 · OLED SH1106 | 2 · Pierwszy ILI9341 | 3 · Surowe menu | 4 · Ulepszone kafelki | 5 · Cyber Dashboard V2 |
+|---|---|---|---|---|
+| Pierwszy prototyp, mały ekran, artefakty i ograniczenia. | Okablowanie i sterowniki pierwszego TFT 240×320. | Działające podstawy, ucięte elementy i błędy nawigacji. | Rozwój układu i ilustracji pod czytelne kafelki dotykowe. | Zatwierdzony kierunek wizualny; integracja i testy trwają. |
 
-## Cyber Dashboard V2 — styl interfejsu
+<p align="center"><img src="docs/showcase/screens/overview.png" width="100%" alt="Eksport widoku Cyber Dashboard V2"></p>
 
-<table><tr><td width="35%"><img src="docs/assets/pablo-splash-preview.png" width="100%" alt="Podgląd ekranu startowego Pablo Hacker"></td><td><strong>Grafika nie zamiast funkcjonalności, tylko obok niej.</strong><p>Ilustrowane Wi-Fi, BLE, Sub-GHz, RFID, IR i pozostałe kafelki, zaprojektowane specjalnie pod dotykowy ekran 240×320. Zaakceptowane referencje obejmują też Bluetooth, skaner BLE, wyniki skanowania i ustawienia.</p><p><em>Po lewej: starszy podgląd splash screenu, nie zdjęcie ukończonego V2.</em></p></td></tr></table>
+## Aktualny interfejs · autentyczne eksporty 240×320
 
-Oryginalne eksporty 240×320 przesłane przez właściciela projektu mają trafić do `docs/showcase/screens/`. **Nie podmieniamy ich na wymyślone zrzuty.**
+<table>
+<tr><td align="center"><strong>Main Menu</strong><br><img src="docs/showcase/screens/overview.png" width="240" alt="Main Menu"></td><td align="center"><strong>Bluetooth</strong><br><img src="docs/showcase/screens/bluetooth-final-preview.png" width="240" alt="Ekran Bluetooth"></td><td align="center"><strong>BLE Scanner</strong><br><img src="docs/showcase/screens/scanner-final-preview.png" width="240" alt="Skaner BLE"></td></tr>
+<tr><td align="center"><strong>Scan Results</strong><br><img src="docs/showcase/screens/results-final-preview.png" width="240" alt="Wyniki skanowania"></td><td align="center"><strong>Settings</strong><br><img src="docs/showcase/screens/settings-final-preview.png" width="240" alt="Ustawienia"></td><td align="center"><strong>Karty BLE / iBeacon</strong><br><img src="docs/showcase/screens/ble-scan-card.png" width="240" alt="Karta skanowania BLE"><br><img src="docs/showcase/screens/ibeacon-card.png" width="240" alt="Karta iBeacon"></td></tr>
+</table>
 
-## Sprzęt i stan projektu
+## Sprzęt i dokumentacja
 
-| Podzespół | Konfiguracja |
+| Podzespół | Aktualna definicja projektu |
 |---|---|
-| Mikrokontroler | ESP32-S3-WROOM-1 N16R8, 16 MB Flash, 8 MB PSRAM |
-| Wyświetlacz | TPM408-2.8 / ILI9341 240×320 |
-| Dotyk | Rezystancyjny XPT2046 |
-| Środowisko | `esp32-s3-n16r8-ili9341-touch` |
-| Dawny prototyp | OLED SH1106 128×64 — etap historyczny, później zwrócony |
+| Kontroler | ESP32-S3-WROOM-1 N16R8 · 16 MB Flash · 8 MB PSRAM |
+| Wyświetlacz | ILI9341 240×320 |
+| Dotyk | Rezystancyjny kontroler XPT2046 |
+| Build | PlatformIO, środowisko `esp32-s3-n16r8-ili9341-touch` |
+| Połączenia | [Schemat GPIO i okablowanie](HARDWARE_WIRING.md) |
 
-**Potwierdzone:** uruchomienie wyświetlacza, ścieżka dotyku w testowanych ekranach, kompilacja i flashowanie. **W trakcie:** pełna nawigacja, powrót BLE, działanie podmenu, grafiki i fizyczne testy końcowe. Obecność funkcji w kodzie nie gwarantuje, że odpowiedni moduł jest podłączony.
+**Potwierdzony stan projektu:** udokumentowano uruchomienie wyświetlacza, ścieżkę dotyku na testowanych ekranach oraz proces budowania i flashowania firmware. Pełna nawigacja, powrót BLE, podmenu, spójność wizualna i końcowe testy fizyczne pozostają w toku. Nie deklarujemy gotowej obudowy 3D ani fikcyjnych wyników testów.
+
+## Dalsze kroki
+
+- dokończyć i zweryfikować ścieżki menu oraz nawigacji;
+- kontynuować integrację sprzętową i testy fizyczne;
+- synchronizować eksporty 240×320 i informacje o pochodzeniu grafik;
+- zapisywać zmiany w [historii zmian](CHANGELOG.md).
 
 ## Dokumentacja
 
-[Połączenia](HARDWARE_WIRING.md) · [Kompilacja](docs/software/build.md) · [Diagnostyka](DIAGNOSTYKA.md) · [Błędy](KNOWN_ISSUES.md) · [Historia zmian](CHANGELOG.md) · [Mapa grafik](docs/showcase/ASSET_MANIFEST.md)
+[Build Guide](docs/software/build.md) · [Diagnostyka](DIAGNOSTYKA.md) · [Znane problemy](KNOWN_ISSUES.md) · [Historia zmian](CHANGELOG.md) · [Wykaz grafik](docs/showcase/ASSET_MANIFEST.md)
 
-<sub>Nieoficjalny wariant [BruceButBetter](https://github.com/Yoursel71/BruceButBetter). Zachowano atrybucję twórców i [licencję](LICENSE). Funkcje bezpieczeństwa wyłącznie do autoryzowanych testów i nauki.</sub>
+<sub>Nieoficjalny wariant <a href="https://github.com/Yoursel71/BruceButBetter">BruceButBetter</a>. Zachowano autorstwo, atrybucję i <a href="LICENSE">licencję</a>. Funkcje bezpieczeństwa wyłącznie do autoryzowanych testów i nauki.</sub>
