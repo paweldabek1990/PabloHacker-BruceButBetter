@@ -1,33 +1,42 @@
-# Pablo Hacker — BruceButBetter
+<p align="center"><img src="docs/showcase/hero.svg" width="100%" alt="BruceButBetter Pablo Hacker Edition — Cyber Dashboard V2"></p>
+<p align="center"><a href="README_PL.md">🇵🇱 Polski</a> · <a href="README.md">🇬🇧 English</a></p>
+# BruceButBetter / Pablo Hacker Edition
 
-Nieoficjalny wariant sprzętowy BruceButBetter dla ESP32-S3-WROOM-1 N16R8 z ekranem TPM408-2.8 ILI9341 240×320 oraz dotykiem XPT2046.
+**Cyber Dashboard V2** · ESP32-S3-WROOM-1 N16R8 · ILI9341 240×320 · XPT2046
 
-## Status
+![Rozwój](https://img.shields.io/badge/status-aktywny_rozwój-00bfa8?style=for-the-badge) ![ESP32](https://img.shields.io/badge/MCU-ESP32--S3-00a5cb?style=for-the-badge) ![Dotyk](https://img.shields.io/badge/Dotyk-XPT2046-10ae97?style=for-the-badge)
 
-Firmware uruchamia pełne menu, Terminal Green, ekran startowy Pablo Hacker i obsługę dotyku. Fizycznie potwierdzono TFT, dotyk, menu, skanowanie Wi-Fi oraz standardową reklamę BLE `BRUCE-BLE-TEST`. Moduły CC1101, NRF24, PN532/RFID, IR, Si5351, SD i pozostałe rozszerzenia pozostają niezweryfikowane fizycznie, jeśli nie wskazano inaczej w dokumentacji.
+> **Od maleńkiego OLED-a do własnego urządzenia z dotykowym ekranem.** To nieoficjalny wariant BruceButBetter i zapis faktycznych prób z elektroniką, firmware i interfejsem. Wizualizacje koncepcyjne nie są przedstawiane jako zdjęcia działającego sprzętu.
 
-## Sprzęt i GPIO
+## Nasza droga: pięć etapów
 
-Pełna tabela znajduje się w [HARDWARE_WIRING.md](HARDWARE_WIRING.md) oraz [docs/hardware/pinout.md](docs/hardware/pinout.md). Główne SPI: MOSI GPIO11, SCK GPIO12, MISO GPIO13; TFT CS15/DC17/RST16; Touch CS10; SD CS14.
+| 01 · Mały OLED | 02 · Pierwszy TFT | 03 · Surowe menu | 04 · Graficzne kafelki | 05 · Cyber Dashboard V2 |
+|:---:|:---:|:---:|:---:|:---:|
+| Testy I²C i SH1106, mały ekran, artefakty | ILI9341 2,8″ na breadboardzie, integracja dotyku | Przycięcia, przesunięcia, trudna nawigacja | Tematyczne ilustracje i rozpoznawalny motyw Pablo Hacker | Docelowa estetyka, dalsza naprawa podmenu i dotyku |
+| Historyczny prototyp | Uruchamianie sprzętu | Wczesne funkcjonalne UI | Iteracja graficzna | **W trakcie** |
 
-## Budowanie
+**Archiwum zdjęć jest kompletowane:** prawdziwa fotografia OLED-a → pierwszy TFT na płytce stykowej → ucięte menu → pierwsze kafelki → zaakceptowane projekty V2. Nie oznaczamy rekonstrukcji jako autentycznych zdjęć. [Wykaz i pochodzenie obrazów](docs/showcase/ASSET_MANIFEST.md).
 
-```powershell
-pio run -e esp32-s3-n16r8-ili9341-touch
-```
+## Cyber Dashboard V2 — styl interfejsu
 
-Konfiguracja używa pioarduino / Arduino-ESP32 3.3.6. Przed flashowaniem zawsze zidentyfikuj układ przez `esptool chip-id`; nie używaj `erase_flash` i nie kasuj NVS.
+<table><tr><td width="35%"><img src="docs/assets/pablo-splash-preview.png" width="100%" alt="Podgląd ekranu startowego Pablo Hacker"></td><td><strong>Grafika nie zamiast funkcjonalności, tylko obok niej.</strong><p>Ilustrowane Wi-Fi, BLE, Sub-GHz, RFID, IR i pozostałe kafelki, zaprojektowane specjalnie pod dotykowy ekran 240×320. Zaakceptowane referencje obejmują też Bluetooth, skaner BLE, wyniki skanowania i ustawienia.</p><p><em>Po lewej: starszy podgląd splash screenu, nie zdjęcie ukończonego V2.</em></p></td></tr></table>
+
+Oryginalne eksporty 240×320 przesłane przez właściciela projektu mają trafić do `docs/showcase/screens/`. **Nie podmieniamy ich na wymyślone zrzuty.**
+
+## Sprzęt i stan projektu
+
+| Podzespół | Konfiguracja |
+|---|---|
+| Mikrokontroler | ESP32-S3-WROOM-1 N16R8, 16 MB Flash, 8 MB PSRAM |
+| Wyświetlacz | TPM408-2.8 / ILI9341 240×320 |
+| Dotyk | Rezystancyjny XPT2046 |
+| Środowisko | `esp32-s3-n16r8-ili9341-touch` |
+| Dawny prototyp | OLED SH1106 128×64 — etap historyczny, później zwrócony |
+
+**Potwierdzone:** uruchomienie wyświetlacza, ścieżka dotyku w testowanych ekranach, kompilacja i flashowanie. **W trakcie:** pełna nawigacja, powrót BLE, działanie podmenu, grafiki i fizyczne testy końcowe. Obecność funkcji w kodzie nie gwarantuje, że odpowiedni moduł jest podłączony.
 
 ## Dokumentacja
 
-- [README.md](README.md) — wersja angielska
-- [UPSTREAM.md](UPSTREAM.md) — pochodzenie i licencja
-- [HARDWARE_WIRING.md](HARDWARE_WIRING.md) — okablowanie
-- [docs/hardware/rugged-a.md](docs/hardware/rugged-a.md) — obudowa Rugged A1
-- [DIAGNOSTYKA.md](DIAGNOSTYKA.md) — dziennik techniczny
-- [KNOWN_ISSUES.md](KNOWN_ISSUES.md) — znane ograniczenia
-- [docs/hardware/AS_BUILT/VERIFICATION_REPORT.md](docs/hardware/AS_BUILT/VERIFICATION_REPORT.md) — ostrożna dokumentacja ze zdjęć rzeczywistego zestawu
+[Połączenia](HARDWARE_WIRING.md) · [Kompilacja](docs/software/build.md) · [Diagnostyka](DIAGNOSTYKA.md) · [Błędy](KNOWN_ISSUES.md) · [Historia zmian](CHANGELOG.md) · [Mapa grafik](docs/showcase/ASSET_MANIFEST.md)
 
-Zdjęcia potwierdzają obecność trzech płytek stykowych i modułów, ale nie pozwalają jeszcze jednoznacznie odtworzyć każdego przewodu, rzędu ani mostka zasilania. Nie rozłączaj działającego zestawu wyłącznie na podstawie roboczej dokumentacji AS_BUILT.
-
-Projekt jest przeznaczony wyłącznie do autoryzowanych testów, edukacji i pracy na własnym sprzęcie/sieci.
+<sub>Nieoficjalny wariant [BruceButBetter](https://github.com/Yoursel71/BruceButBetter). Zachowano atrybucję twórców i [licencję](LICENSE). Funkcje bezpieczeństwa wyłącznie do autoryzowanych testów i nauki.</sub>
