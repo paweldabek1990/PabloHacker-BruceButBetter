@@ -10,10 +10,7 @@
 
 ## Nasza droga: pięć etapów
 
-| 01 · Mały OLED | 02 · Pierwszy TFT | 03 · Surowe menu | 04 · Graficzne kafelki | 05 · Cyber Dashboard V2 |
-|:---:|:---:|:---:|:---:|:---:|
-| Testy I²C i SH1106, mały ekran, artefakty | ILI9341 2,8″ na breadboardzie, integracja dotyku | Przycięcia, przesunięcia, trudna nawigacja | Tematyczne ilustracje i rozpoznawalny motyw Pablo Hacker | Docelowa estetyka, dalsza naprawa podmenu i dotyku |
-| Historyczny prototyp | Uruchamianie sprzętu | Wczesne funkcjonalne UI | Iteracja graficzna | **W trakcie** |
+<p align="center"><img src="docs/showcase/development-journey.svg" width="100%" alt="Pięć etapów rozwoju: OLED, TFT, menu, ilustracje, Cyber Dashboard V2"></p>
 
 **Archiwum zdjęć jest kompletowane:** prawdziwa fotografia OLED-a → pierwszy TFT na płytce stykowej → ucięte menu → pierwsze kafelki → zaakceptowane projekty V2. Nie oznaczamy rekonstrukcji jako autentycznych zdjęć. [Wykaz i pochodzenie obrazów](docs/showcase/ASSET_MANIFEST.md).
 
