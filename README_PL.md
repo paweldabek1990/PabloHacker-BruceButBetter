@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/showcase/pablo-hacker-reference.png" width="100%" alt="BruceButBetter — Dolphin One"></p>
+<p align="center"><img src="docs/showcase/pablo-hacker-reference.png" width="100%" alt="Dolphin One D1 — Cyber Dashboard V2"></p>
 
 > **Branding transition / Zmiana nazwy:** Dolphin One (D1) is the new project name. The historical artwork above still contains the old logo and will be replaced, not falsely presented as the new brand.
 <p align="center"><a href="README_PL.md">🇵🇱 Polski</a> · <a href="README.md">🇬🇧 English</a></p>
