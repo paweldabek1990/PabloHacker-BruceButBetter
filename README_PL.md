@@ -1,13 +1,15 @@
-<p align="center"><img src="docs/showcase/pablo-hacker-reference.png" width="100%" alt="BruceButBetter — Pablo Hacker Edition"></p>
+<p align="center"><img src="docs/showcase/pablo-hacker-reference.png" width="100%" alt="BruceButBetter — Dolphin One"></p>
+
+> **Branding transition / Zmiana nazwy:** Dolphin One (D1) is the new project name. The historical artwork above still contains the old logo and will be replaced, not falsely presented as the new brand.
 <p align="center"><a href="README_PL.md">🇵🇱 Polski</a> · <a href="README.md">🇬🇧 English</a></p>
 
-# BruceButBetter / Pablo Hacker Edition
+# BruceButBetter / Dolphin One
 
 **Cyber Dashboard V2** · ESP32-S3-WROOM-1 N16R8 · ILI9341 240×320 · XPT2046
 
 ![Status](https://img.shields.io/badge/status-aktywny_rozwój-00bfa8?style=for-the-badge) ![ESP32-S3](https://img.shields.io/badge/MCU-ESP32--S3-00a5cb?style=for-the-badge) ![ILI9341](https://img.shields.io/badge/wyświetlacz-ILI9341_240%C3%97320-10ae97?style=for-the-badge) ![PlatformIO](https://img.shields.io/badge/build-PlatformIO-f58220?style=for-the-badge)
 
-> Rzeczywisty zapis rozwoju sprzętu i interfejsu — od małego eksperymentu z OLED-em SH1106 do kierunku Pablo Hacker Edition. Grafika pozostaje grafiką; nie przedstawiamy jej jako dowodu gotowej obudowy ani ukończonego urządzenia.
+> Rzeczywisty zapis rozwoju sprzętu i interfejsu — od małego eksperymentu z OLED-em SH1106 do kierunku Dolphin One. Grafika pozostaje grafiką; nie przedstawiamy jej jako dowodu gotowej obudowy ani ukończonego urządzenia.
 
 ## Nasza droga rozwoju
 
