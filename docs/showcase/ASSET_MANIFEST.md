@@ -1,4 +1,4 @@
-# Visual assets and provenance — Pablo Hacker Edition
+# Visual assets and provenance — Dolphin One / D1
 
 **Approved reference:** the last five-stage cyan/green design shown in ChatGPT, with hero, OLED → TFT → raw menu → illustrated tiles → Cyber Dashboard V2, five real 240×320 screens and honest development status. Preserve its design direction. The original raster reference is not yet committed here; `hero.svg` is a lightweight stand-in using the same palette.
 
@@ -30,3 +30,6 @@ Dark navy-black #020e12, neon green #00ffae, cyan #00d6d1. Fine circuit grid, il
 - Both languages must stay equivalent and all image links must resolve.
 - Validate the README renders in GitHub dark and light modes.
 - No fabricated photographs, contributors, status badges or released firmware claims.
+
+## Rebrand 2026-10-12
+Canonical product name: **Dolphin One**, short UI form **D1**. Historical filenames containing `pablo` remain until binary image replacement is reviewed; do not disguise old reference art as updated. The approved original theme remains an archived evolution stage.
