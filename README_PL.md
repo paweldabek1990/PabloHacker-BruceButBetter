@@ -1,33 +1,44 @@
-# Pablo Hacker — BruceButBetter
+# Dolphin One (D1)
+ESP32-S3 N16R8 • ILI9341 240×320 • XPT2046 • projekt oparty na BruceButBetter
 
-Nieoficjalny wariant sprzętowy BruceButBetter dla ESP32-S3-WROOM-1 N16R8 z ekranem TPM408-2.8 ILI9341 240×320 oraz dotykiem XPT2046.
+[English](README.md) · [Stan projektu](docs/software/PROJECT_STATE.md) · [Kod i funkcje](docs/software/CODE_MAP.md) · [Budowanie](docs/software/build.md)
 
-## Status
+## Referencja wizualna
+![Referencja brandingu Dolphin One](docs/showcase/dolphin-one-d2-reference.png)
 
-Firmware uruchamia pełne menu, Terminal Green, ekran startowy Pablo Hacker i obsługę dotyku. Fizycznie potwierdzono TFT, dotyk, menu, skanowanie Wi-Fi oraz standardową reklamę BLE `BRUCE-BLE-TEST`. Moduły CC1101, NRF24, PN532/RFID, IR, Si5351, SD i pozostałe rozszerzenia pozostają niezweryfikowane fizycznie, jeśli nie wskazano inaczej w dokumentacji.
+To istniejąca referencja brandingu Dolphin One D2, przeniesiona z gałęzi dokumentacyjnej. Jest grafiką projektową, nie zdjęciem ani potwierdzonym zrzutem działającego firmware. Skrót produktu to D1; D2 w nazwie pliku oznacza referencję, nie drugi model sprzętu. Późniejsze referencje menu V8 nie są dostępne w tej kopii.
 
-## Sprzęt i GPIO
+## Co faktycznie mamy
+Kod firmware na tej publicznej gałęzi pozostaje historyczną bazą sprzętową z 9 października 2026. Dokumentację uzgodniono 17 października 2026. **Nie jest to wydanie późniejszego firmware D1 wgranego lokalnie.** Kod nadal zawiera historyczny branding.
 
-Pełna tabela znajduje się w [HARDWARE_WIRING.md](HARDWARE_WIRING.md) oraz [docs/hardware/pinout.md](docs/hardware/pinout.md). Główne SPI: MOSI GPIO11, SCK GPIO12, MISO GPIO13; TFT CS15/DC17/RST16; Touch CS10; SD CS14.
+W toku projektu sprawdzano wyświetlacz, dotyk oraz nawigację menu/Wi-Fi. Nie potwierdza to wszystkich ścieżek menu na obecnym urządzeniu. Dokładne powiązanie lokalnych źródeł D1 z plikiem firmware wymaga importu.
 
-## Budowanie
+| Funkcja | Status dla tej konfiguracji |
+|---|---|
+| ILI9341 / XPT2046 | Skonfigurowane; historycznie sprawdzane |
+| Wi-Fi / BLE | Kod obecny; pełne testy fizyczne pozostają do wykonania |
+| USB/HID | Włączone w konfiguracji; odbiór fizyczny niepotwierdzony |
+| RFID/NFC, Sub-GHz, NRF24, IR | Kod/konfiguracja obecne; wymagają zgodnych modułów i testów |
+| SD / pliki | Kod obecny; w historii zgłaszano problemy montowania SD |
+| LoRa / GPS / Ethernet / FM | Wyłączone flagami tego środowiska |
+
+[Mapa kodu](docs/software/CODE_MAP.md) wskazuje pliki i ograniczenia weryfikacji.
+
+## Sprzęt i budowanie
+16 MB flash, 8 MB PSRAM. Wspólne SPI: MOSI 11, SCK 12, MISO 13. TFT CS 15, DC 17, RESET 16; touch CS 10; SD CS 14 (niezweryfikowane).
 
 ```powershell
 pio run -e esp32-s3-n16r8-ili9341-touch
 ```
 
-Konfiguracja używa pioarduino / Arduino-ESP32 3.3.6. Przed flashowaniem zawsze zidentyfikuj układ przez `esptool chip-id`; nie używaj `erase_flash` i nie kasuj NVS.
+[Połączenia](HARDWARE_WIRING.md) · [Budowanie i flashowanie](docs/software/build.md) · [Dowody fizycznych połączeń](docs/hardware/AS_BUILT/VERIFICATION_REPORT.md)
 
 ## Dokumentacja
+- [Stan projektu, pochodzenie danych i lokalne pliki do odzyskania](docs/software/PROJECT_STATE.md)
+- [Mapa modułów i kodu](docs/software/CODE_MAP.md)
+- [Aktualny status walidacji](docs/testing/validation-status.md)
+- [Znane problemy](KNOWN_ISSUES.md)
+- [Pochodzenie grafik](docs/showcase/ASSET_MANIFEST.md)
+- [Historyczny changelog](CHANGELOG.md)
 
-- [README.md](README.md) — wersja angielska
-- [UPSTREAM.md](UPSTREAM.md) — pochodzenie i licencja
-- [HARDWARE_WIRING.md](HARDWARE_WIRING.md) — okablowanie
-- [docs/hardware/rugged-a.md](docs/hardware/rugged-a.md) — obudowa Rugged A1
-- [DIAGNOSTYKA.md](DIAGNOSTYKA.md) — dziennik techniczny
-- [KNOWN_ISSUES.md](KNOWN_ISSUES.md) — znane ograniczenia
-- [docs/hardware/AS_BUILT/VERIFICATION_REPORT.md](docs/hardware/AS_BUILT/VERIFICATION_REPORT.md) — ostrożna dokumentacja ze zdjęć rzeczywistego zestawu
-
-Zdjęcia potwierdzają obecność trzech płytek stykowych i modułów, ale nie pozwalają jeszcze jednoznacznie odtworzyć każdego przewodu, rzędu ani mostka zasilania. Nie rozłączaj działającego zestawu wyłącznie na podstawie roboczej dokumentacji AS_BUILT.
-
-Projekt jest przeznaczony wyłącznie do autoryzowanych testów, edukacji i pracy na własnym sprzęcie/sieci.
+Nieoficjalny wariant [BruceButBetter](https://github.com/Yoursel71/BruceButBetter). Zachowano autorstwo i [licencję AGPL-3.0](LICENSE).

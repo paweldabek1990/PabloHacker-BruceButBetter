@@ -1,20 +1,16 @@
-# Validation status
+# Aktualny status walidacji
+Data przeglądu dokumentacji: 2026-10-17.
 
-## Physically confirmed
+| Obszar | Dowód / ograniczenie |
+|---|---|
+| Konfiguracja płytki i menu | Odczytano bezpośrednio źródła GitHub |
+| Wyświetlacz / dotyk / Wi-Fi | Historyczne próby opisane w dokumentacji; brak nowych testów fizycznych |
+| Lokalne wdrożenie D1 z 12 października | Zgłoszone w historii; oryginalnych logów nie odczytano w tej sesji |
+| Źródła odpowiadające lokalnej binarce | Niezaimportowane; brak potwierdzonego powiązania |
+| Referencje V8 | Zgłoszone; pliki niedostępne w odczytanych gałęziach |
+| BLE Back i pełna nawigacja | Odbiór fizyczny niepotwierdzony |
+| SD / dodatkowe moduły | Nie deklarujemy sprawności |
+| Build w tej sesji | Nie uruchomiono; aktualizacja dokumentacyjna |
+| Flash w tej sesji | Nie wykonywano |
 
-- Adafruit ILI9341 color/text test on the documented SPI wiring.
-- XPT2046 returned changing X/Y/Z readings.
-- Full firmware menu and touch navigation operate on the ESP32-S3 target.
-- Wi-Fi scan list rendered and could be navigated.
-- Terminal Green menu theme works.
-- Pablo Hacker splash timing and menu transition were observed.
-
-## Code/build confirmed
-
-- `esp32-s3-n16r8-ili9341-touch` builds with Arduino-ESP32 3.3.6.
-- RGB565 bitmap transfer uses local `setSwapBytes(true)` around `pushImage()`.
-- Latest flash was verified by esptool on the confirmed ESP32-S3 COM18.
-
-## Not physically verified here
-
-RF/CC1101, both NRF24 modules, PN532/RFID, Si5351, IR, microSD, BLE attack features, USB HID peripherals, and official Bruce App mirroring.
+Historyczne wpisy DIAGNOSTYKA.md, CHANGELOG.md i KNOWN_ISSUES.md opisują kolejne próby, czasem ze sprzecznymi statusami. Nie należy sumować ich jako jednego aktualnego wyniku PASS. Patrz [stan projektu](../software/PROJECT_STATE.md).
